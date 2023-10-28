@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "543187367447",
+    "project_id": "projet-orion-cb071",
+    "storage_bucket": "projet-orion-cb071.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543187367447:android:4e4a35e58c9ea5492bce52",
+        "android_client_info": {
+          "package_name": "com.example.projet_android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCElO-3AnRk7PNPVyQX870df6EbF8Gymyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
