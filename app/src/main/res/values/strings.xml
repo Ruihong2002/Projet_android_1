@@ -4,4 +4,5 @@
     <string name="WELCOME">WELCOME</string>
     <string name="id_email">Identifiant (email)</string>
     <string name="password">mot de passe</string>
+    <string name="test">Interface</string>
 </resources>
