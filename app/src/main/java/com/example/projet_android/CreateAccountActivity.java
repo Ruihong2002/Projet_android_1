@@ -17,7 +17,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         aBtnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setContentView(R.layout.activity_main);
-
             }
         });
         final Button aBtnCreate = findViewById(R.id.button3);
@@ -27,5 +26,5 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
 
     }
-    }
+
 }
