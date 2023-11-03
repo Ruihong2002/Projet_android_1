@@ -6,4 +6,6 @@
     <string name="password">mot de passe</string>
     <string name="test">Interface</string>
     <string name="creer">CREATE</string>
+    <string name="mon_profil">Mon Profil</string>
+    <string name="retour">BACK</string>
 </resources>

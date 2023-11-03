@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Projet_android"
         tools:targetApi="31">
         <activity
+            android:name=".PageMonProfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".InterfacePrincipalActivity"
             android:exported="false" />
         <activity

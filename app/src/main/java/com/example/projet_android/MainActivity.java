@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
         aBtnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setContentView(R.layout.interface_principal);
-
             }
         });
         final Button aBtnCreate = findViewById(R.id.button);
