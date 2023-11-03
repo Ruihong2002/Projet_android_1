@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ImageView myImageView = (ImageView) findViewById(R.id.imageView);
-        myImageView.setImageResource(R.drawable.logo);
+        myImageView.setImageResource(R.drawable.logo_complet);
 
         final Button aBtnLogin = findViewById(R.id.button2);
         aBtnLogin.setOnClickListener(new View.OnClickListener() {
