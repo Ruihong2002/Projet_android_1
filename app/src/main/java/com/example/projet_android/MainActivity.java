@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        //test
         setContentView(R.layout.activity_main);
 
         ImageView myImageView = (ImageView) findViewById(R.id.imageView);
