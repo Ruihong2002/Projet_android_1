@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Projet_android</string>
-    <string name="button_login">Login</string>
+    <string name="button_login">LOGIN</string>
     <string name="WELCOME">WELCOME</string>
     <string name="id_email">Identifiant (email)</string>
     <string name="password">mot de passe</string>
     <string name="test">Interface</string>
+    <string name="creer">CREATE</string>
 </resources>

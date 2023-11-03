@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,8 +16,16 @@ public class MainActivity extends AppCompatActivity {
         final Button aBtnLogin = findViewById(R.id.button2);
         aBtnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setContentView(R.layout.interface_principale);
+                setContentView(R.layout.interface_principal);
+
             }
         });
+        final Button aBtnCreate = findViewById(R.id.button);
+        aBtnCreate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setContentView(R.layout.create_account);
+            }
+        });
+
     }
 }
