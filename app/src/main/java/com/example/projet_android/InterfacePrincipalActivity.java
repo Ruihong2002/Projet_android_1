@@ -2,6 +2,7 @@ package com.example.projet_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,13 +17,16 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         final Button pBtnBack = findViewById(R.id.button5);
         pBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setContentView(R.layout.activity_main);
+
+                Intent it = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(it);
             }
         });
         final Button pBtnProfil = findViewById(R.id.button6);
         pBtnProfil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setContentView(R.layout.page_mon_profil);
+                Intent it = new Intent(getApplicationContext(), PageMonProfilActivity.class);
+                startActivity(it);
             }
         });
     }

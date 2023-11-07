@@ -2,6 +2,7 @@ package com.example.projet_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +17,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         final Button aBtnLogin = findViewById(R.id.button4);
         aBtnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setContentView(R.layout.activity_main);
+                Intent it = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(it);
             }
         });
         final Button aBtnCreate = findViewById(R.id.button3);

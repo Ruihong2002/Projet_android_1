@@ -2,6 +2,7 @@ package com.example.projet_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,13 +23,15 @@ public class MainActivity extends AppCompatActivity {
         final Button aBtnLogin = findViewById(R.id.button2);
         aBtnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setContentView(R.layout.interface_principal);
+                Intent it = new Intent(getApplicationContext(), InterfacePrincipalActivity.class);
+                startActivity(it);
             }
         });
         final Button aBtnCreate = findViewById(R.id.button);
         aBtnCreate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setContentView(R.layout.create_account);
+                Intent it = new Intent(getApplicationContext(), CreateAccountActivity.class);
+                startActivity(it);
             }
         });
 
