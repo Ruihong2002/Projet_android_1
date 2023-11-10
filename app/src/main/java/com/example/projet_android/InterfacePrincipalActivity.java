@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class InterfacePrincipalActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
-        final Button pBtnProfil = findViewById(R.id.button6);
+        final ImageButton pBtnProfil = (ImageButton)findViewById(R.id.imageButtonMonProfil);
         pBtnProfil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent(getApplicationContext(), PageMonProfilActivity.class);
