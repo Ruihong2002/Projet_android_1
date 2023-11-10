@@ -14,6 +14,8 @@
         android:layout_marginTop="450dp"
         android:layout_marginEnd="160dp"
         android:layout_marginBottom="5dp"
+        android:fontFamily="@font/boldthick"
+        android:textColorHint="@color/white"
         android:hint="@string/creer"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +31,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="160dp"
         android:hint="@string/button_login"
+        android:fontFamily="@font/boldthick"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
