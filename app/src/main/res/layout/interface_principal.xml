@@ -36,4 +36,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <ImageButton
+        android:id="@+id/imageButtonConversation"
+        android:layout_width="70dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginEnd="170dp"
+        android:layout_marginBottom="5dp"
+        android:contentDescription="@string/Btn_conv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/sym_action_chat" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
