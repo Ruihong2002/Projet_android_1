@@ -41,6 +41,7 @@ public class InterfaceConversationActivity extends AppCompatActivity {
         List<Profil> aProfil= new ArrayList<Profil>();
 
 // ici aProfil va etre rempli avec la firebase.
+        aProfil.add(new Profil("Zhang","Laurent",R.drawable.logo_complet));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter(getApplicationContext(),aProfil));
