@@ -9,31 +9,47 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class InterfacePrincipalActivity extends AppCompatActivity {
 
+    FirebaseAuth aAuth;
+    Button aLogOut;
+    FirebaseUser user;
+    ImageButton aBtnProfil,aBtnConv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interface_principal);
 
-        final Button pBtnBack = findViewById(R.id.button5);
-        pBtnBack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        aLogOut = findViewById(R.id.button5);
+        aBtnConv= (ImageButton) findViewById(R.id.imageButtonConversation);
+        aBtnProfil = (ImageButton)findViewById(R.id.imageButtonMonProfil);
+        aAuth=FirebaseAuth.getInstance();
+        user = aAuth.getCurrentUser();
 
+        if (user==null) {
+            Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(it);
+            finish();
+        }
+        aLogOut.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
                 Intent it = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(it);
+                finish();
             }
         });
-        final ImageButton pBtnProfil = (ImageButton)findViewById(R.id.imageButtonMonProfil);
-        pBtnProfil.setOnClickListener(new View.OnClickListener() {
+        aBtnProfil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent(getApplicationContext(), PageMonProfilActivity.class);
                 startActivity(it);
             }
         });
-
-        final ImageButton pBtnConv= (ImageButton) findViewById(R.id.imageButtonConversation);
-        pBtnConv.setOnClickListener(new View.OnClickListener(){
+        aBtnConv.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent it= new Intent(getApplicationContext(), InterfaceConversationActivity.class );
                 startActivity(it);

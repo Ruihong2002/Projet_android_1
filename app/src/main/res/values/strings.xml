@@ -12,4 +12,5 @@
     <string name="Btn_conv">Conversation</string>
     <string name="Name">Name</string>
     <string name="Surname">Last Name</string>
+    <string name="logout">LogOut</string>
 </resources>
