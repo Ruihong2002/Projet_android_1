@@ -61,7 +61,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/email_create"
             android:hint="@string/id_email"
-            android:fontFamily="@font/boldthick"/>
+            android:fontFamily="@font/boldthick"
+            android:textColor="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -79,6 +80,11 @@
             android:fontFamily="@font/boldthick"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ProgressBar
+        android:id="@+id/progessBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <Button
         style="?android:attr/borderlessButtonStyle"

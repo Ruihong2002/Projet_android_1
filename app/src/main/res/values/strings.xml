@@ -2,14 +2,14 @@
     <string name="app_name">Orion</string>
     <string name="button_login">LOGIN</string>
     <string name="Welcome">Welcome</string>
-    <string name="id_email">Identifiant (email)</string>
-    <string name="password">mot de passe</string>
+    <string name="id_email">Email</string>
+    <string name="password">password</string>
     <string name="test">Interface</string>
     <string name="creer">CREATE</string>
-    <string name="mon_profil">Mon Profil</string>
+    <string name="mon_profil">My profiles</string>
     <string name="retour">BACK</string>
     <string name="Start">Start</string>
     <string name="Btn_conv">Conversation</string>
-    <string name="Name">Prénom</string>
-    <string name="Surname">Nom</string>
+    <string name="Name">Name</string>
+    <string name="Surname">Last Name</string>
 </resources>
