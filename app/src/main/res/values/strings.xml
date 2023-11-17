@@ -10,4 +10,6 @@
     <string name="retour">BACK</string>
     <string name="Start">Start</string>
     <string name="Btn_conv">Conversation</string>
+    <string name="Name">Prénom</string>
+    <string name="Surname">Nom</string>
 </resources>
