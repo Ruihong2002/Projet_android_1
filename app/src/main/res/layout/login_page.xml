@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/logo_complet" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="348dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@color/white">
@@ -28,7 +28,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/arial"
             android:hint="@string/id_email"
             android:textColor="@color/black" />
@@ -36,16 +36,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="348dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
-            android:layout_width="338dp"
-            android:layout_height="46dp"
-            android:layout_marginTop="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/arial"
             android:hint="@string/password"
             android:textColor="@color/black" />
@@ -62,8 +61,8 @@
     <Button
         android:id="@+id/button2"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="181dp"
-        android:layout_height="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="70dp"
         android:drawableTint="@color/white"
@@ -71,16 +70,11 @@
         android:foregroundTint="@color/white"
         android:hint="@string/button_login"
         android:textColor="@color/white"
-        android:textColorHighlight="#00FFFFFF"
         android:textColorHint="@color/white"
-        android:textColorLink="#00FFFFFF"
-        android:textSize="45sp"
+        android:textSize="50dp"
         app:iconTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="@color/white" />
+        app:rippleColor="@color/white" 
+        android:gravity="center"/>
 
     <Button
         android:id="@+id/button"
@@ -91,7 +85,7 @@
         android:fontFamily="@font/boldthick"
         android:hint="@string/creer"
         android:textColorHint="@color/bluesky"
-        android:textSize="30dp"
+        android:textSize="35dp"
         app:iconTint="@color/bluesky"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
@@ -107,7 +101,7 @@
         android:gravity="center_horizontal"
         android:text="@string/passwordforgot"
         android:textColor="@color/black"
-        android:textSize="15dp"/>
+        android:textSize="20dp"/>
 
 
 </LinearLayout>
