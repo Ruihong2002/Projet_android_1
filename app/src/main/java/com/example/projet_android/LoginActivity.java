@@ -22,23 +22,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextInputEditText aEmail,aPassword;
+    TextInputEditText aEmail, aPassword;
     Button aBtnLogin, aBtnCreate;
     FirebaseAuth mAuth;
     ProgressBar aProgessBar;
     TextView aPasswordForget;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent it = new Intent(getApplicationContext(), InterfacePrincipalActivity.class);
-            startActivity(it);
-            finish();
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,42 +40,45 @@ public class LoginActivity extends AppCompatActivity {
 
         aBtnLogin = findViewById(R.id.button2);
         aBtnCreate = findViewById(R.id.button);
-        mAuth=FirebaseAuth.getInstance();
-        aEmail=findViewById(R.id.email);
-        aPassword=findViewById(R.id.password);
-        aProgessBar=findViewById(R.id.progessBar);
-        aPasswordForget=findViewById(R.id.mdpforget);
+        mAuth = FirebaseAuth.getInstance();
+        aEmail = findViewById(R.id.email);
+        aPassword = findViewById(R.id.password);
+        aProgessBar = findViewById(R.id.progessBar);
+        aPasswordForget = findViewById(R.id.mdpforget);
         aBtnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 aProgessBar.setVisibility(View.VISIBLE);
-                String email,password;
-                email=aEmail.getText().toString();
-                password=aPassword.getText().toString();
-                if (TextUtils.isEmpty(email)){
-                    Toast.makeText(LoginActivity.this,"Enter email",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(password)){
-                    Toast.makeText(LoginActivity.this,"Enter password",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                aProgessBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this, "Login Successful.", Toast.LENGTH_SHORT).show();
-                                    Intent it = new Intent(getApplicationContext(), InterfacePrincipalActivity.class);
-                                    startActivity(it);
-                                    finish();
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                String email, password;
+                    email = aEmail.getText().toString();
+                    password = aPassword.getText().toString();
+                    if (TextUtils.isEmpty(email)) {
+                        Toast.makeText(LoginActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+                        aProgessBar.setVisibility(View.GONE);
+                        return;
+                    }
+                    if (TextUtils.isEmpty(password)) {
+                        Toast.makeText(LoginActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
+                        aProgessBar.setVisibility(View.GONE);
+                        return;
+                    }
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    aProgessBar.setVisibility(View.GONE);
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, "Login Successful.", Toast.LENGTH_SHORT).show();
+                                        Intent it = new Intent(getApplicationContext(), InterfacePrincipalActivity.class);
+                                        startActivity(it);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
 
+                                    }
                                 }
-                            }
-                        });
-            }
+                            });
+                }
+
         });
 
         aBtnCreate.setOnClickListener(new View.OnClickListener() {
@@ -105,4 +97,17 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent it = new Intent(getApplicationContext(), InterfacePrincipalActivity.class);
+            startActivity(it);
+            finish();
+        }
+    }
+
+
 }

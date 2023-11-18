@@ -5,7 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context=".PageMonProfilActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,15 +21,14 @@
             android:layout_marginLeft="10dp"
             app:srcCompat="@drawable/backbutton"
             android:scaleType="fitCenter"
-            android:background="@color/white"/>
+            android:background="@color/transparant"/>
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/boldthick"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="60dp"
             android:hint="@string/mon_profil"
             android:textColor="@color/black"
             android:textSize="20dp"/>
@@ -38,7 +38,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="75dp"
+            android:layout_marginLeft="80dp"
             app:srcCompat="@drawable/editbutton"
             android:scaleType="fitCenter"
             android:background="@color/white"/>
@@ -51,7 +51,73 @@
         android:layout_gravity="center_vertical"
         android:layout_marginTop="20dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/logo"></ImageView>
+        android:background="@color/white"
+        app:srcCompat="@drawable/avatar_base"></ImageView>
+    <TextView
+        android:id="@+id/identite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/arial"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="15dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/arial"
+        android:text="@string/bio"
+        android:textColor="@color/black"
+        android:textSize="15dp"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/classe"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:fontFamily="@font/arial"
+        ></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/arial"
+        android:text="@string/id_email"
+        android:textColor="@color/black"
+        android:textSize="15dp"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/club"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:fontFamily="@font/arial"
+        ></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hobbies"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:fontFamily="@font/arial"
+        ></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/RS"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:fontFamily="@font/arial"
+        ></TextView>
+
+
+
+
+
 
 
 

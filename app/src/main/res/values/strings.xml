@@ -15,4 +15,11 @@
     <string name="logout">LogOut</string>
     <string name="passwordforgot">Password Forgot</string>
     <string name="send">SEND</string>
+    <string name="classe">Class</string>
+    <string name="bio">Bibliograpgy</string>
+    <string name="RS">Social Network</string>
+    <string name="club">Club</string>
+    <string name="hobbies">Hobbies</string>
+    <string name="identite">Identity</string>
+
 </resources>

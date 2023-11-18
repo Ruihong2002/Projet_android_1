@@ -16,7 +16,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -24,18 +27,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     Button aBtnLogin, aBtnCreate;
     FirebaseAuth mAuth;
     ProgressBar aProgessBar;
+    FirebaseFirestore db;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent it = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(it);
-            finish();
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +42,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         aBtnLogin = findViewById(R.id.button4);
         aBtnCreate = findViewById(R.id.button3);
         aProgessBar=findViewById(R.id.progessBar);
-
+        db=FirebaseFirestore.getInstance();
 
         aBtnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
                 Intent it = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(it);
             }
@@ -89,6 +83,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(CreateAccountActivity.this, "Account Creation Successful.",
                                             Toast.LENGTH_SHORT).show();
+                                    Map<String,Object> user=new HashMap<>();
+                                    user.put("First Name",prenom);
+                                    user.put("Last Name",nom);
+                                    user.put("Email",email);
+                                    db.collection("utilisateur").add(user);
+
                                 } else {
                                     Toast.makeText(CreateAccountActivity.this, "Account Creation Failed.",
                                             Toast.LENGTH_SHORT).show();
