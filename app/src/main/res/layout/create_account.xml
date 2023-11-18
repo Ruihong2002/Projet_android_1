@@ -5,24 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:background="@drawable/background"
     tools:context=".CreateAccountActivity">
 
     <ImageView
-        android:layout_marginTop="20dp"
         android:id="@+id/imageView"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
+        android:layout_width="196dp"
+        android:layout_height="176dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_complet"
-        tools:visibility="visible"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/black"/>
+        tools:visibility="visible" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:layout_marginTop="5dp">
@@ -30,39 +31,41 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Surname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/Surname"
-            android:textColor="@color/black"
-            android:fontFamily="@font/arial" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginTop="5dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Name"
-            android:hint="@string/Name"
-            android:textColor="@color/black"
-            android:fontFamily="@font/arial"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginTop="5dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/email_create"
-            android:hint="@string/id_email"
+            android:layout_height="47dp"
             android:fontFamily="@font/arial"
-            android:textColor="@color/black"/>
+            android:hint="@string/Surname"
+            android:textColor="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Name"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:fontFamily="@font/arial"
+            android:hint="@string/Name"
+            android:textColor="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="5dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_create"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:fontFamily="@font/arial"
+            android:hint="@string/id_email"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -70,14 +73,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_marginTop="5dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/password_create"
-            android:hint="@string/password"
-            android:textColor="@color/black"
-            android:fontFamily="@font/arial"/>
+        android:layout_marginTop="7dp">
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
@@ -87,31 +84,40 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
 
-    <Button
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_marginTop="5dp"
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/boldthick"
-        android:hint="@string/creer"
-        android:textSize="45sp"
-        android:textColorHint="@color/white"
-        android:layout_gravity="center_horizontal"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password_create"
+        android:layout_width="350dp"
+        android:layout_height="39dp"
+        android:background="@color/white"
+        android:fontFamily="@font/arial"
+        android:hint="@string/password"
+        android:textColor="@color/black" />
 
     <Button
+        android:id="@+id/button3"
         style="?android:attr/borderlessButtonStyle"
-        android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/button_login"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/boldthick"
-        android:textSize="25dp"
+        android:hint="@string/creer"
+        android:textColorHint="@color/white"
+        android:textSize="35sp" />
+
+    <Button
+        android:id="@+id/button4"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/boldthick"
+        android:hint="@string/button_login"
         android:textColorHint="@color/bluesky"
+        android:textSize="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
 
 </LinearLayout>

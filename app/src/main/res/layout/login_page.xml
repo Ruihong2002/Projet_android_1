@@ -11,38 +11,44 @@
 
 
     <ImageView
-        android:layout_marginTop="20dp"
         android:id="@+id/imageView"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
+        android:layout_width="236dp"
+        android:layout_height="205dp"
+        android:layout_marginTop="20dp"
         android:visibility="visible"
         app:srcCompat="@drawable/logo_complet" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:background="@color/white">
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
+            android:fontFamily="@font/arial"
             android:hint="@string/id_email"
-            android:textColor="@color/black"
-            android:fontFamily="@font/arial"/>
+            android:textColor="@color/black" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:background="@color/white">
+
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/password"
+            android:layout_width="338dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/arial"
             android:hint="@string/password"
-            android:textColor="@color/black"
-            android:fontFamily="@font/arial"/>
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
@@ -52,11 +58,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
 
+
     <Button
         android:id="@+id/button2"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="181dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70dp"
         android:drawableTint="@color/white"
         android:fontFamily="@font/boldthick"
         android:foregroundTint="@color/white"
@@ -71,15 +80,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="@color/white"
-        android:layout_gravity="center_horizontal"/>
+        app:rippleColor="@color/white" />
 
     <Button
         android:id="@+id/button"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:fontFamily="@font/boldthick"
         android:hint="@string/creer"
         android:textColorHint="@color/bluesky"
@@ -91,19 +99,15 @@
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <TextView
+        android:id="@+id/mdpforget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/arial"
         android:gravity="center_horizontal"
         android:text="@string/passwordforgot"
         android:textColor="@color/black"
-        android:fontFamily="@font/arial"
-        android:layout_marginBottom="30dp"
-        android:textSize="15dp"
-        android:id="@+id/mdpforget"/>
-
-
-
-
+        android:textSize="15dp"/>
 
 
 </LinearLayout>
