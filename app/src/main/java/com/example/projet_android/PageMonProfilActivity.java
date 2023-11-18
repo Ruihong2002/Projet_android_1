@@ -3,10 +3,13 @@ package com.example.projet_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,10 +25,13 @@ public class PageMonProfilActivity extends AppCompatActivity {
     FirebaseAuth aAuth;
     FirebaseUser aUser;
     ImageButton aBtnBack,aBtnEdit;
-    TextView aTextId;
+    TextView aTextId,aTextEmail,aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
+    ProgressBar aProgressBar;
+    ImageView aPdP;
 
     FirebaseFirestore aDatabase;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +42,18 @@ public class PageMonProfilActivity extends AppCompatActivity {
         aBtnBack = findViewById(R.id.Btnback);
         aBtnEdit=findViewById(R.id.BtnEdit);
         aTextId=findViewById(R.id.identite);
+        aTextEmail=findViewById(R.id.email_edit);
+        aTextEmailAff=findViewById(R.id.email_text);
+        aTextClasseAff=findViewById(R.id.classe);
+        aTextLoisirAff=findViewById(R.id.loisir);
+        aTextClubAff=findViewById(R.id.club);
+        aTextRSAff=findViewById(R.id.res_so);
+        aTextBioAff=findViewById(R.id.biographie);
+        aPdP=findViewById(R.id.userpdp);
+        aProgressBar=findViewById(R.id.progessBar1);
+
         aDatabase=FirebaseFirestore.getInstance();
+
 
         aDatabase.collection("utilisateur").whereEqualTo("Email",aUser.getEmail()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -46,7 +63,22 @@ public class PageMonProfilActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String aPrenom = document.get("First Name").toString();
                                 String aNom=document.get("Last Name").toString();
+                                String aEmail=document.get("Email").toString();
                             aTextId.setText(aPrenom+" "+aNom);
+                            aTextEmail.setText(aEmail);
+
+
+                            aProgressBar.setVisibility(View.GONE);
+                            aTextId.setVisibility(View.VISIBLE);
+                            aTextEmail.setVisibility(View.VISIBLE);
+                            aTextEmailAff.setVisibility(View.VISIBLE);
+                            aTextClasseAff.setVisibility(View.VISIBLE);
+                            aTextLoisirAff.setVisibility(View.VISIBLE);
+                            aTextClubAff.setVisibility(View.VISIBLE);
+                            aTextRSAff.setVisibility(View.VISIBLE);
+                            aTextBioAff.setVisibility(View.VISIBLE);
+                            aPdP.setVisibility(View.VISIBLE);
+
 
                             }
                         }
