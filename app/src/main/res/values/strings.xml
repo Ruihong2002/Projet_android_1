@@ -13,4 +13,6 @@
     <string name="Name">Name</string>
     <string name="Surname">Last Name</string>
     <string name="logout">LogOut</string>
+    <string name="passwordforgot">Password Forgot</string>
+    <string name="send">SEND</string>
 </resources>

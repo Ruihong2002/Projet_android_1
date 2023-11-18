@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/id_email"
             android:textColor="@color/black"
-            android:fontFamily="@font/boldthick"/>
+            android:fontFamily="@font/arial"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -43,14 +43,15 @@
             android:id="@+id/password"
             android:hint="@string/password"
             android:textColor="@color/black"
-            android:fontFamily="@font/boldthick"/>
+            android:fontFamily="@font/arial"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id="@+id/progessBar"
         android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/button2"
@@ -89,6 +90,21 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/passwordforgot"
+        android:textColor="@color/black"
+        android:fontFamily="@font/arial"
+        android:layout_marginBottom="30dp"
+        android:textSize="15dp"
+        android:id="@+id/mdpforget"/>
+
+
+
+
 
 
 </LinearLayout>

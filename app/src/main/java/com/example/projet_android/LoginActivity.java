@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     Button aBtnLogin, aBtnCreate;
     FirebaseAuth mAuth;
     ProgressBar aProgessBar;
+    TextView aPasswordForget;
 
     @Override
     public void onStart() {
@@ -53,10 +55,11 @@ public class LoginActivity extends AppCompatActivity {
         aEmail=findViewById(R.id.email);
         aPassword=findViewById(R.id.password);
         aProgessBar=findViewById(R.id.progessBar);
+        aPasswordForget=findViewById(R.id.mdpforget);
         aBtnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 aProgessBar.setVisibility(View.VISIBLE);
-                String email,password,nom,prenom;
+                String email,password;
                 email=aEmail.getText().toString();
                 password=aPassword.getText().toString();
                 if (TextUtils.isEmpty(email)){
@@ -89,6 +92,14 @@ public class LoginActivity extends AppCompatActivity {
         aBtnCreate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent(getApplicationContext(), CreateAccountActivity.class);
+                startActivity(it);
+            }
+        });
+
+        aPasswordForget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(getApplicationContext(), PasswordForget.class);
                 startActivity(it);
             }
         });
