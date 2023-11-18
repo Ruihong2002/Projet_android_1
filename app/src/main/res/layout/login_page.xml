@@ -16,8 +16,7 @@
         android:layout_width="230dp"
         android:layout_height="230dp"
         android:visibility="visible"
-        app:srcCompat="@drawable/logo_complet"
-        tools:visibility="visible" />
+        app:srcCompat="@drawable/logo_complet" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
