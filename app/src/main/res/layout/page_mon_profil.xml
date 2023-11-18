@@ -1,49 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".PageMonProfilActivity">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".PageMonProfilActivity"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="170dp"
-        android:hint="@string/mon_profil"
-        android:fontFamily="@font/boldthick"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="10dp"
-        android:hint="@string/retour"
-        android:fontFamily="@font/boldthick"
-        android:textColorHint="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/Btnback"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/backbutton"
+            android:scaleType="fitCenter"
+            android:background="@color/white"/>
 
-    <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="72dp"
-        android:ems="10"
-        android:hint="@string/retour"
-        android:fontFamily="@font/boldthick"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/boldthick"
+            android:layout_marginLeft="70dp"
+            android:hint="@string/mon_profil"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/BtnEdit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="75dp"
+            app:srcCompat="@drawable/editbutton"
+            android:scaleType="fitCenter"
+            android:background="@color/white"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/userpdp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/logo"></ImageView>
+
+
+
+
+</LinearLayout>
