@@ -16,8 +16,7 @@
         android:layout_height="205dp"
         android:layout_marginTop="20dp"
         android:visibility="visible"
-        app:srcCompat="@drawable/logo_complet"
-        tools:visibility="visible" />
+        app:srcCompat="@drawable/logo_complet" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="348dp"
