@@ -12,36 +12,41 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="256dp"
-        android:layout_height="203dp"
+        android:layout_width="236dp"
+        android:layout_height="205dp"
         android:layout_marginTop="20dp"
         android:visibility="visible"
         app:srcCompat="@drawable/logo_complet"
         tools:visibility="visible" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:background="@color/white">
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="52dp"
             android:fontFamily="@font/arial"
             android:hint="@string/id_email"
             android:textColor="@color/black" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:background="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
+            android:layout_width="338dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="@font/arial"
             android:hint="@string/password"
             android:textColor="@color/black" />
@@ -53,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
+
 
     <Button
         android:id="@+id/button2"
@@ -76,7 +82,6 @@
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/white" />
-
 
     <Button
         android:id="@+id/button"
@@ -103,7 +108,7 @@
         android:gravity="center_horizontal"
         android:text="@string/passwordforgot"
         android:textColor="@color/black"
-        android:textSize="15dp" />
+        android:textSize="15dp"/>
 
 
 </LinearLayout>
