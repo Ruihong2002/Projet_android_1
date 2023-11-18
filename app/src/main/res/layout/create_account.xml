@@ -26,12 +26,12 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Surname"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
+            android:layout_height="40dp"
             android:fontFamily="@font/arial"
             android:hint="@string/Surname"
             android:textColor="@color/black" />
@@ -43,12 +43,12 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Name"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="40dp"
             android:fontFamily="@font/arial"
             android:hint="@string/Name"
             android:textColor="@color/black" />
@@ -57,12 +57,12 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_create"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="40dp"
             android:fontFamily="@font/arial"
             android:hint="@string/id_email"
             android:textColor="@color/black" />
@@ -70,12 +70,21 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_marginTop="7dp">
+        android:layout_marginTop="10dp">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_create"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:fontFamily="@font/arial"
+            android:hint="@string/password"
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <ProgressBar
         android:id="@+id/progessBar"
@@ -83,15 +92,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/password_create"
-        android:layout_width="350dp"
-        android:layout_height="39dp"
-        android:background="@color/white"
-        android:fontFamily="@font/arial"
-        android:hint="@string/password"
-        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/button3"

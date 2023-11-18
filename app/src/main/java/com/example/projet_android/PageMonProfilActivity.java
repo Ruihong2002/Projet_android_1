@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,10 +26,10 @@ public class PageMonProfilActivity extends AppCompatActivity {
     FirebaseAuth aAuth;
     FirebaseUser aUser;
     ImageButton aBtnBack,aBtnEdit;
-    TextView aTextId,aTextEmail,aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
+    TextView aTextId,aTextEmail,aTextBio,aTextClasse,aTextClub,aTextLoisir;
+    TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
     ProgressBar aProgressBar;
     ImageView aPdP;
-
     FirebaseFirestore aDatabase;
 
     @SuppressLint("MissingInflatedId")
@@ -39,6 +40,7 @@ public class PageMonProfilActivity extends AppCompatActivity {
 
         aAuth=FirebaseAuth.getInstance();
         aUser=aAuth.getCurrentUser();
+
         aBtnBack = findViewById(R.id.Btnback);
         aBtnEdit=findViewById(R.id.BtnEdit);
         aTextId=findViewById(R.id.identite);
@@ -51,40 +53,59 @@ public class PageMonProfilActivity extends AppCompatActivity {
         aTextBioAff=findViewById(R.id.biographie);
         aPdP=findViewById(R.id.userpdp);
         aProgressBar=findViewById(R.id.progessBar1);
+        aTextBio=findViewById(R.id.bio_change);
+        aTextClasse=findViewById(R.id.classe_edit);
+        aTextClub=findViewById(R.id.club_edit);
+        aTextLoisir=findViewById(R.id.hobbies_edit);
 
         aDatabase=FirebaseFirestore.getInstance();
-
 
         aDatabase.collection("utilisateur").whereEqualTo("Email",aUser.getEmail()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                String aPrenom = document.get("First Name").toString();
-                                String aNom=document.get("Last Name").toString();
-                                String aEmail=document.get("Email").toString();
-                            aTextId.setText(aPrenom+" "+aNom);
-                            aTextEmail.setText(aEmail);
+                                String pPrenom = document.get("First Name").toString();
+
+                                String pNom=document.get("Last Name").toString();
+
+                                String pEmail=document.get("Email").toString();
+
+                                String pBio=document.get("Bio").toString();
+
+                                String pHobbies=document.get("Hobbies").toString();
+
+
+                            aTextId.setText(pPrenom+" "+pNom);
+                            aTextEmail.setText(pEmail);
+                            aTextBio.setText(pBio);
+                            aTextLoisir.setText(pHobbies);
+
 
 
                             aProgressBar.setVisibility(View.GONE);
-                            aTextId.setVisibility(View.VISIBLE);
-                            aTextEmail.setVisibility(View.VISIBLE);
                             aTextEmailAff.setVisibility(View.VISIBLE);
                             aTextClasseAff.setVisibility(View.VISIBLE);
                             aTextLoisirAff.setVisibility(View.VISIBLE);
                             aTextClubAff.setVisibility(View.VISIBLE);
                             aTextRSAff.setVisibility(View.VISIBLE);
                             aTextBioAff.setVisibility(View.VISIBLE);
+
                             aPdP.setVisibility(View.VISIBLE);
+                            aTextId.setVisibility(View.VISIBLE);
+                            aTextEmail.setVisibility(View.VISIBLE);
+                            aTextBio.setVisibility(View.VISIBLE);
+                            aTextClasse.setVisibility(View.VISIBLE);
+                            aTextClub.setVisibility(View.VISIBLE);
+                            aTextLoisir.setVisibility(View.VISIBLE);
 
 
                             }
                         }
                     }
                 });
-
 
 
 
@@ -97,7 +118,8 @@ public class PageMonProfilActivity extends AppCompatActivity {
         aBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent it = new Intent(getApplicationContext(), EditProfilsActivity.class);
+                startActivity(it);
             }
         });
 

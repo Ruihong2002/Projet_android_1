@@ -87,6 +87,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     user.put("First Name",prenom);
                                     user.put("Last Name",nom);
                                     user.put("Email",email);
+                                    user.put("Hobbies","Hobbies");
+                                    user.put("Bio","Biography");
+
                                     db.collection("utilisateur").add(user);
 
                                 } else {
@@ -99,5 +102,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
 
     }
+
 
 }
