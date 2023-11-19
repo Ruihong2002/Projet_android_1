@@ -14,8 +14,8 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             android:contentDescription="@string/btnback"
@@ -31,14 +31,14 @@
             android:layout_marginStart="50dp"
             android:hint="@string/mon_profil"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textColorHighlight="@color/black"
             android:textColorHint="@color/black"/>
 
         <ImageButton
             android:id="@+id/BtnEdit"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:layout_marginStart="70dp"
             app:srcCompat="@drawable/confimer"
