@@ -14,11 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -113,9 +115,10 @@ public class EditProfilsActivity extends AppCompatActivity {
                 String pHobbies,pBio,pEmail;
                 pHobbies=aHobbies.getText().toString();
                 pBio=aBio.getText().toString();
-                pEmail=aTextEmail.toString();
-                UpdateProfilBio(pEmail,pBio);
-                UpdateProfilHobbies(pEmail,pHobbies);
+                pEmail=aUser.getEmail();
+                aHobbies.setText("");
+                aBio.setText("");
+                UpdateProfil(pEmail,pHobbies,pBio);
 
                 Intent it = new Intent(getApplicationContext(), PageMonProfilActivity.class);
                 startActivity(it);
@@ -124,55 +127,41 @@ public class EditProfilsActivity extends AppCompatActivity {
     }
 
 
-    private void UpdateProfilHobbies(String pEmail, String pContenu){
+    private void UpdateProfil(String pEmail, String pHobbies,String pBio){
+        aDatabase=FirebaseFirestore.getInstance();
         Map<String,Object> userData=new HashMap<>();
-        userData.put("Hobbies",pContenu);
+        userData.put("Hobbies",pHobbies);
+        userData.put("Bio",pBio);
 
         aDatabase.collection("utilisateur")
                 .whereEqualTo("Email",pEmail)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()){
                             DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
                             String vDocID=documentSnapshot.getId();
-                            aDatabase.collection("utilisateur")
-                                    .document(vDocID).update(userData)
+                            DocumentReference docRef= aDatabase.collection("utilisateur").document(vDocID);
+                            docRef.update(userData)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
+                                            Toast.makeText(EditProfilsActivity.this, "Successful.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(EditProfilsActivity.this, "fail.",
+                                                    Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
-                        }
+
                     }
                 });
 
     }
 
-    private void UpdateProfilBio(String pEmail, String pContenu){
-        Map<String,Object> userData=new HashMap<>();
-        userData.put("Bio",pContenu);
 
-        aDatabase.collection("utilisateur")
-                .whereEqualTo("Email",pEmail)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()){
-                            DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
-                            String vDocID=documentSnapshot.getId();
-                            aDatabase.collection("utilisateur")
-                                    .document(vDocID).update(userData)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
 
-                                        }
-                                    });
-                        }
-                    }
-                });
-
-    }
 }
