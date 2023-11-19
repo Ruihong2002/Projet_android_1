@@ -45,11 +45,5 @@
         android:textSize="20dp"
         android:layout_marginTop="20dp"/>
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:visibility="visible"
-        app:srcCompat="@drawable/logo_esiee"/>
 
 </LinearLayout>
