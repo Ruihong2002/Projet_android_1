@@ -44,4 +44,12 @@
         android:hint="@string/Start"
         android:textSize="20dp"
         android:layout_marginTop="30dp"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
+        android:visibility="visible"
+        app:srcCompat="@drawable/ESIEE_Paris_logo"/>
+
 </LinearLayout>
