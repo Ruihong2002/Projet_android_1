@@ -28,25 +28,25 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/boldthick"
-            android:layout_marginStart="50dp"
             android:hint="@string/mon_profil"
             android:textColor="@color/black"
-            android:textSize="20sp"
             android:textColorHighlight="@color/black"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/BtnEdit"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="70dp"
-            app:srcCompat="@drawable/editbutton"
-            android:scaleType="fitCenter"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
             android:contentDescription="@string/btnedit"
-            android:background="@color/white"/>
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/editbutton" />
     </LinearLayout>
 
     <ImageView

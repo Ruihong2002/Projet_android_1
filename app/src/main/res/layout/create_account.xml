@@ -108,7 +108,7 @@
     <Button
         android:id="@+id/button4"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="203dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp"
