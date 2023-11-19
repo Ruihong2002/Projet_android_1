@@ -31,7 +31,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Surname"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:fontFamily="@font/arial"
             android:hint="@string/Surname"
             android:textColor="@color/black" />
@@ -48,7 +48,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Name"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:fontFamily="@font/arial"
             android:hint="@string/Name"
             android:textColor="@color/black" />
@@ -62,7 +62,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_create"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:fontFamily="@font/arial"
             android:hint="@string/id_email"
             android:textColor="@color/black" />
@@ -78,7 +78,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_create"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:fontFamily="@font/arial"
             android:hint="@string/password"
             android:textColor="@color/black" />

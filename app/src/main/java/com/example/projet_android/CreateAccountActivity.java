@@ -89,6 +89,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     user.put("Email",email);
                                     user.put("Hobbies","Hobbies");
                                     user.put("Bio","Biography");
+                                    user.put("Class","class");
 
                                     db.collection("utilisateur").add(user);
 

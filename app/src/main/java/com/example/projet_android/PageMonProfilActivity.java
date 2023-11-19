@@ -77,11 +77,14 @@ public class PageMonProfilActivity extends AppCompatActivity {
 
                                 String pHobbies=document.get("Hobbies").toString();
 
+                                String pClass=document.get("Class").toString();
+
 
                             aTextId.setText(pPrenom+" "+pNom);
                             aTextEmail.setText(pEmail);
                             aTextBio.setText(pBio);
                             aTextLoisir.setText(pHobbies);
+                            aTextClasse.setText(pClass);
 
 
 
