@@ -3,22 +3,29 @@ package com.example.projet_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -27,7 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditProfilsActivity extends AppCompatActivity {
+public class EditProfilsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     FirebaseAuth aAuth;
     FirebaseUser aUser;
@@ -41,6 +48,9 @@ public class EditProfilsActivity extends AppCompatActivity {
     FirebaseFirestore aDatabase;
 
     TextInputEditText aBio,aHobbies;
+
+    Spinner aClasse;
+
 
 
     @Override
@@ -68,15 +78,20 @@ public class EditProfilsActivity extends AppCompatActivity {
 
         aPdP=findViewById(R.id.userpdp);
 
+        aClasse=findViewById(R.id.class_select);
+
         aProgressBar=findViewById(R.id.progessBar1);
 
         aDatabase=FirebaseFirestore.getInstance();
 
+        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.ListeClasse,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aClasse.setAdapter(adapter);
 
-        aDatabase=FirebaseFirestore.getInstance();
 
         aDatabase.collection("utilisateur").whereEqualTo("Email",aUser.getEmail()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -84,8 +99,14 @@ public class EditProfilsActivity extends AppCompatActivity {
                                 String pPrenom = document.get("First Name").toString();
                                 String pNom = document.get("Last Name").toString();
                                 String pEmail = document.get("Email").toString();
+                                String pHobbies=document.get("Hobbies").toString();
+                                String pBio=document.get("Bio").toString();
+
                                 aTextId.setText(pPrenom + " " + pNom);
                                 aTextEmail.setText(pEmail);
+                                aHobbies.setText(pHobbies);
+                                aBio.setText(pBio);
+
 
                                 aProgressBar.setVisibility(View.GONE);
                                 aTextEmailAff.setVisibility(View.VISIBLE);
@@ -101,22 +122,25 @@ public class EditProfilsActivity extends AppCompatActivity {
 
                                 aHobbies.setVisibility(View.VISIBLE);
                                 aBio.setVisibility(View.VISIBLE);
+                                aClasse.setVisibility(View.VISIBLE);
+
 
                             }
                         }
                     }
                 });
 
+            aClasse.setOnItemSelectedListener(this);
             aBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String pHobbies,pBio,pEmail;
                 pHobbies=aHobbies.getText().toString();
                 pBio=aBio.getText().toString();
-                pEmail=aTextEmail.toString();
-                UpdateProfilBio(pEmail,pBio);
-                UpdateProfilHobbies(pEmail,pHobbies);
-
+                pEmail=aUser.getEmail();
+                UpdateProfil(pEmail,pHobbies,pBio);
+                aHobbies.setText(pHobbies);
+                aBio.setText(pBio);
                 Intent it = new Intent(getApplicationContext(), PageMonProfilActivity.class);
                 startActivity(it);
             }
@@ -124,55 +148,79 @@ public class EditProfilsActivity extends AppCompatActivity {
     }
 
 
-    private void UpdateProfilHobbies(String pEmail, String pContenu){
+    private void UpdateProfil(String pEmail, String pHobbies,String pBio){
+        aDatabase=FirebaseFirestore.getInstance();
         Map<String,Object> userData=new HashMap<>();
-        userData.put("Hobbies",pContenu);
+        userData.put("Hobbies",pHobbies);
+        userData.put("Bio",pBio);
 
         aDatabase.collection("utilisateur")
                 .whereEqualTo("Email",pEmail)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()){
                             DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
                             String vDocID=documentSnapshot.getId();
-                            aDatabase.collection("utilisateur")
-                                    .document(vDocID).update(userData)
+                            DocumentReference docRef= aDatabase.collection("utilisateur").document(vDocID);
+                            docRef.update(userData)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
+                                            Toast.makeText(EditProfilsActivity.this, "Successful.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(EditProfilsActivity.this, "fail.",
+                                                    Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
-                        }
+
                     }
                 });
 
     }
 
-    private void UpdateProfilBio(String pEmail, String pContenu){
-        Map<String,Object> userData=new HashMap<>();
-        userData.put("Bio",pContenu);
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String vClass=adapterView.getItemAtPosition(i).toString();
+        aDatabase=FirebaseFirestore.getInstance();
+        Map<String,Object> userData=new HashMap<>();
+        userData.put("Class",vClass);
+        String vEmail=aUser.getEmail();
         aDatabase.collection("utilisateur")
-                .whereEqualTo("Email",pEmail)
+                .whereEqualTo("Email",vEmail)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()){
-                            DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
-                            String vDocID=documentSnapshot.getId();
-                            aDatabase.collection("utilisateur")
-                                    .document(vDocID).update(userData)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
+                        DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
+                        String vDocID=documentSnapshot.getId();
+                        DocumentReference docRef= aDatabase.collection("utilisateur").document(vDocID);
+                        docRef.update(userData)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(EditProfilsActivity.this, "Successful.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(EditProfilsActivity.this, "fail.",
+                                                Toast.LENGTH_SHORT).show();
 
-                                        }
-                                    });
-                        }
+                                    }
+                                });
+
                     }
                 });
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 }

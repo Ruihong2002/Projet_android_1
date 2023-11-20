@@ -14,8 +14,8 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             android:contentDescription="@string/btnback"
@@ -28,19 +28,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/boldthick"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="30dp"
             android:hint="@string/mon_profil"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textColorHighlight="@color/black"
             android:textColorHint="@color/black"/>
 
         <ImageButton
             android:id="@+id/BtnEdit"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="20dp"
             app:srcCompat="@drawable/confimer"
             android:scaleType="fitCenter"
             android:contentDescription="@string/btnedit"
@@ -100,6 +100,13 @@
         android:fontFamily="@font/arial"
         android:visibility="gone"
         android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/class_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
 
     <TextView
         android:id="@+id/classe_edit"
