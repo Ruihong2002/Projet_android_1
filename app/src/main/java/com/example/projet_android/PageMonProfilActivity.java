@@ -65,7 +65,6 @@ public class PageMonProfilActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String pPrenom = document.get("First Name").toString();
 
@@ -79,14 +78,11 @@ public class PageMonProfilActivity extends AppCompatActivity {
 
                                 String pClass=document.get("Class").toString();
 
-
                             aTextId.setText(pPrenom+" "+pNom);
                             aTextEmail.setText(pEmail);
+                            aTextClasse.setText(pClass);
                             aTextBio.setText(pBio);
                             aTextLoisir.setText(pHobbies);
-                            aTextClasse.setText(pClass);
-
-
 
                             aProgressBar.setVisibility(View.GONE);
                             aTextEmailAff.setVisibility(View.VISIBLE);
@@ -103,8 +99,6 @@ public class PageMonProfilActivity extends AppCompatActivity {
                             aTextClasse.setVisibility(View.VISIBLE);
                             aTextClub.setVisibility(View.VISIBLE);
                             aTextLoisir.setVisibility(View.VISIBLE);
-
-
                             }
                         }
                     }
