@@ -23,21 +23,22 @@
 
     <ImageButton
         android:id="@+id/imageButtonMonProfil"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="82dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:adjustViewBounds="false"
         android:contentDescription="@string/mon_profil"
-        app:shapeAppearanceOverlay="@style/Cercle"
         android:filterTouchesWhenObscured="false"
         android:fitsSystemWindows="false"
         android:focusable="auto"
         android:keepScreenOn="true"
+        android:scaleType="fitCenter"
         android:scrollbarFadeDuration="50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:shapeAppearanceOverlay="@style/Cercle"
+        tools:srcCompat="@drawable/avatar_base" />
 
     <ImageButton
         android:id="@+id/imageButtonConversation"
@@ -60,13 +61,12 @@
         android:layout_marginStart="70dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="70dp"
+        android:contentDescription="@string/conversation"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_complet"
-        tools:visibility="visible"
-        android:contentDescription="@string/conversation" />
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
