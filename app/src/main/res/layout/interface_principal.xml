@@ -29,6 +29,7 @@
         android:layout_marginTop="28dp"
         android:adjustViewBounds="false"
         android:contentDescription="@string/mon_profil"
+        app:shapeAppearanceOverlay="@style/Cercle"
         android:filterTouchesWhenObscured="false"
         android:fitsSystemWindows="false"
         android:focusable="auto"
@@ -65,6 +66,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_complet"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        android:contentDescription="@string/conversation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

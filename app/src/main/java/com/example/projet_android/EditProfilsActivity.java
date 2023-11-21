@@ -1,16 +1,18 @@
 package com.example.projet_android;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -31,32 +33,37 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class EditProfilsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
+    private static final int PICK_IMAGE_REQUEST = 1;
     FirebaseAuth aAuth;
     FirebaseUser aUser;
     TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
 
     TextView aTextId,aTextEmail;
     ProgressBar aProgressBar;
-    ImageView aPdP;
 
     ImageButton aBtnEdit;
+    ImageView aPdP;
     FirebaseFirestore aDatabase;
 
     TextInputEditText aBio,aHobbies;
 
     Spinner aClasse;
-
+    Uri aImagePdP;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.edit_profils);
+
 
         aAuth=FirebaseAuth.getInstance();
         aUser=aAuth.getCurrentUser();
@@ -84,10 +91,17 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
 
         aDatabase=FirebaseFirestore.getInstance();
 
+
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.ListeClasse,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         aClasse.setAdapter(adapter);
 
+        /*aPdP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFileChooser();
+            }
+        });*/
 
         aDatabase.collection("utilisateur").whereEqualTo("Email",aUser.getEmail()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -101,12 +115,12 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                                 String pEmail = document.get("Email").toString();
                                 String pHobbies=document.get("Hobbies").toString();
                                 String pBio=document.get("Bio").toString();
+                                String pClass=document.get("Class").toString();
 
                                 aTextId.setText(pPrenom + " " + pNom);
                                 aTextEmail.setText(pEmail);
                                 aHobbies.setText(pHobbies);
                                 aBio.setText(pBio);
-
 
                                 aProgressBar.setVisibility(View.GONE);
                                 aTextEmailAff.setVisibility(View.VISIBLE);
@@ -125,34 +139,54 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                                 aClasse.setVisibility(View.VISIBLE);
 
 
+
                             }
                         }
                     }
                 });
 
             aClasse.setOnItemSelectedListener(this);
+
             aBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String pHobbies,pBio,pEmail;
-                pHobbies=aHobbies.getText().toString();
-                pBio=aBio.getText().toString();
-                pEmail=aUser.getEmail();
-                UpdateProfil(pEmail,pHobbies,pBio);
-                aHobbies.setText(pHobbies);
-                aBio.setText(pBio);
+                String vHobbies,vBio,vEmail;
+                vHobbies=aHobbies.getText().toString();
+                vBio=aBio.getText().toString();
+                vEmail=aUser.getEmail();
+                if (TextUtils.isEmpty(vBio)==false) {
+                    UpdateProfil(vEmail,"Bio",vBio);
+                }
+                if (TextUtils.isEmpty(vHobbies)==false) {
+                    UpdateProfil(vEmail,"Hobbies",vHobbies);
+                }
                 Intent it = new Intent(getApplicationContext(), PageMonProfilActivity.class);
                 startActivity(it);
             }
         });
     }
+/*
+    private void openFileChooser() {
+        Intent intent=new Intent();
+        intent.setType("Pdp/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,PICK_IMAGE_REQUEST);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==PICK_IMAGE_REQUEST && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            aImagePdP=data.getData();
 
-    private void UpdateProfil(String pEmail, String pHobbies,String pBio){
+            //Picasso.with(this).load(aImagePdP).into(aPdP);
+        }
+    }*/
+
+    private void UpdateProfil(String pEmail, String pDataID, String pData){
         aDatabase=FirebaseFirestore.getInstance();
         Map<String,Object> userData=new HashMap<>();
-        userData.put("Hobbies",pHobbies);
-        userData.put("Bio",pBio);
+        userData.put(pDataID,pData);
 
         aDatabase.collection("utilisateur")
                 .whereEqualTo("Email",pEmail)
@@ -183,40 +217,11 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
 
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String vClass=adapterView.getItemAtPosition(i).toString();
-        aDatabase=FirebaseFirestore.getInstance();
-        Map<String,Object> userData=new HashMap<>();
-        userData.put("Class",vClass);
         String vEmail=aUser.getEmail();
-        aDatabase.collection("utilisateur")
-                .whereEqualTo("Email",vEmail)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
-                        String vDocID=documentSnapshot.getId();
-                        DocumentReference docRef= aDatabase.collection("utilisateur").document(vDocID);
-                        docRef.update(userData)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(EditProfilsActivity.this, "Successful.",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(EditProfilsActivity.this, "fail.",
-                                                Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
-
-                    }
-                });
+        UpdateProfil(vEmail,"Class",vClass);
     }
 
     @Override

@@ -47,7 +47,7 @@
             android:background="@color/white"/>
     </LinearLayout>
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/userpdp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -55,6 +55,7 @@
         android:layout_marginTop="20dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/avatar_base"
+        app:shapeAppearanceOverlay="@style/Cercle"
         android:contentDescription="@string/pdp"
         android:visibility="gone"/>
 
@@ -108,14 +109,6 @@
         android:visibility="gone"/>
 
 
-    <TextView
-        android:id="@+id/classe_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/arial"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/email_text"
