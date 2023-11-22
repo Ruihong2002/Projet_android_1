@@ -73,7 +73,8 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_create"
@@ -81,7 +82,8 @@
             android:layout_height="60dp"
             android:fontFamily="@font/arial"
             android:hint="@string/password"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
