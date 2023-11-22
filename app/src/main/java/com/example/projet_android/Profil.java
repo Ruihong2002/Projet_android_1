@@ -13,27 +13,27 @@ public class Profil {
         this.aPdP = aPdP;
     }
 
-    public String getaPersonNom() {
+    public String getPersonNom() {
         return aPersonNom;
     }
 
-    public void setaPersonNom(String aPersonNom) {
+    public void setPersonNom(String aPersonNom) {
         this.aPersonNom = aPersonNom;
     }
 
-    public String getaPersonPrenom() {
+    public String getPersonPrenom() {
         return aPersonPrenom;
     }
 
-    public void setaPersonPrenom(String aPersonPrenom) {
+    public void setPersonPrenom(String aPersonPrenom) {
         this.aPersonPrenom = aPersonPrenom;
     }
 
-    public int getaPdP() {
+    public int getPdP() {
         return aPdP;
     }
 
-    public void setaPdP(int aPdP) {
+    public void setPdP(int aPdP) {
         this.aPdP = aPdP;
     }
 }

@@ -26,6 +26,7 @@
     <string name="pdp">pdp</string>
     <string name="logo">logo</string>
     <string name="conversation">conversation</string>
+    <string name="profil_other">profil_other</string>
 
     <string-array name="ListeClasse">
         <item>Class</item>

@@ -48,8 +48,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-auth:22.3.0")
 
-
-    implementation ("com.squareup.picasso:picasso:2.8")
+    implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation("com.github.bumptech.glide:glide:4.14.2")
 
 
 

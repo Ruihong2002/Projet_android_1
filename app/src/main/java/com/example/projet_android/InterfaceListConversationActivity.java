@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InterfaceConversationActivity extends AppCompatActivity {
+public class InterfaceListConversationActivity extends AppCompatActivity {
 
 
     @Override

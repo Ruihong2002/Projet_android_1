@@ -13,9 +13,9 @@ public class MyAdapter extends RecyclerView.Adapter<List_Profil> {
 
     Context context;
     List<Profil> aProfil;
-    public MyAdapter(Context context, List<Profil> aProfil) {
+    public MyAdapter(Context context, List<Profil> pProfil) {
         this.context = context;
-        this.aProfil = aProfil;
+        this.aProfil = pProfil;
     }
 
 
@@ -27,9 +27,9 @@ public class MyAdapter extends RecyclerView.Adapter<List_Profil> {
 
     @Override
     public void onBindViewHolder(@NonNull List_Profil holder, int position) {
-        holder.prenomView.setText(aProfil.get(position).getaPersonPrenom());
-        holder.nomView.setText(aProfil.get(position).getaPersonNom());
-        holder.imageView.setImageResource(aProfil.get(position).getaPdP());
+        holder.prenomView.setText(aProfil.get(position).getPersonPrenom());
+        holder.nomView.setText(aProfil.get(position).getPersonNom());
+        holder.imageView.setImageResource(aProfil.get(position).getPdP());
     }
 
     @Override
