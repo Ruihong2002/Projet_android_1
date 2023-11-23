@@ -4,13 +4,23 @@ public class Profil {
 
     String aPersonNom;
     String aPersonPrenom;
+    String aEmail;
     int aPdP;
 
-    public Profil(String aPersonNom, String aPersonPrenom, int aPdP) {
+    public String getaEmail() {
+        return aEmail;
+    }
+
+    public void setaEmail(String aEmail) {
+        this.aEmail = aEmail;
+    }
+
+    public Profil(String aPersonNom, String aPersonPrenom, String aEmail, int aPdP) {
 
         this.aPersonNom = aPersonNom;
         this.aPersonPrenom = aPersonPrenom;
         this.aPdP = aPdP;
+        this.aEmail=aEmail;
     }
 
     public String getPersonNom() {

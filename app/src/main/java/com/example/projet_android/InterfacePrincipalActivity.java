@@ -31,10 +31,16 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         aAuth=FirebaseAuth.getInstance();
         user = aAuth.getCurrentUser();
 
+        Profil pProfil=new Profil("Tran","Patrick","patrick.tran@edu.esiee.fr",R.drawable.logo_complet);
         aOtherProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent it=new Intent(getApplicationContext(), PageAutreProflsActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("profil_nom",pProfil.getPersonNom());
+                bundle.putString("profil_name",pProfil.getPersonPrenom());
+                bundle.putString("profil_email",pProfil.getaEmail());
+                it.putExtras(bundle);
                 startActivity(it);
                 finish();
             }

@@ -39,7 +39,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/identite"
+        android:id="@+id/identite_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/arial"
@@ -49,7 +49,7 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/biographie"
+        android:id="@+id/biographie_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/arial"
@@ -67,7 +67,7 @@
 
 
     <TextView
-        android:id="@+id/classe"
+        android:id="@+id/classe_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/classe"
@@ -85,7 +85,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/email_text"
+        android:id="@+id/email_text_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/arial"
@@ -111,7 +111,7 @@
     </ProgressBar>
 
     <TextView
-        android:id="@+id/club"
+        android:id="@+id/club_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/club"
@@ -129,7 +129,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/loisir"
+        android:id="@+id/loisir_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/hobbies"
@@ -147,7 +147,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/res_so"
+        android:id="@+id/res_so_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/RS"
