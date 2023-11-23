@@ -18,6 +18,5 @@ public class List_Profil extends RecyclerView.ViewHolder {
         prenomView=itemView.findViewById(R.id.aPersonPrenom);
         nomView=itemView.findViewById(R.id.aPersonNom);
 
-
     }
 }

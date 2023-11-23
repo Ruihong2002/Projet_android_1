@@ -3,22 +3,21 @@ package com.example.projet_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class InterfacePrincipalActivity extends AppCompatActivity {
 
     FirebaseAuth aAuth;
-    Button aLogOut;
+    Button aLogOut,aOtherProfile;
     FirebaseUser user;
     ImageButton aBtnProfil,aBtnConv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +26,19 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         aLogOut = findViewById(R.id.button5);
         aBtnConv= (ImageButton) findViewById(R.id.imageButtonConversation);
         aBtnProfil = (ImageButton)findViewById(R.id.imageButtonMonProfil);
+
+        aOtherProfile=findViewById(R.id.btnOther);
         aAuth=FirebaseAuth.getInstance();
         user = aAuth.getCurrentUser();
+
+        aOtherProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it=new Intent(getApplicationContext(), PageAutreProflsActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
         if (user==null) {
             Intent it = new Intent(getApplicationContext(), LoginActivity.class);
@@ -51,7 +61,7 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         });
         aBtnConv.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent it= new Intent(getApplicationContext(), InterfaceConversationActivity.class );
+                Intent it= new Intent(getApplicationContext(), InterfaceListConversationActivity.class );
                 startActivity(it);
             }
         });

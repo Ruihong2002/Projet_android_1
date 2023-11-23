@@ -30,7 +30,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".InterfaceConversationActivity"
+            android:name=".InterfaceListConversationActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
