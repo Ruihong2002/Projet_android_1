@@ -29,9 +29,13 @@
 
     <string-array name="ListeClasse">
         <item>Class</item>
-        <item>E1A</item><item>E1B</item>
-        <item>E2A</item><item>E2B</item>
-        <item>E3E</item><item>E3S</item><item>E3T</item>
+        <item>E1A</item>
+        <item>E1B</item>
+        <item>E2A</item>
+        <item>E2B</item>
+        <item>E3E</item>
+        <item>E3S</item>
+        <item>E3T</item>
         <item>E3FE Embedded System</item>
         <item>E3FG Industrial Engineering</item>
         <item>E3FR Network and Security</item>
