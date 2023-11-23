@@ -64,25 +64,25 @@
     <Button
         android:id="@+id/button2"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="324dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="70dp"
         android:drawableTint="@color/white"
         android:fontFamily="@font/boldthick"
         android:foregroundTint="@color/white"
+        android:gravity="center"
         android:hint="@string/button_login"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="50dp"
         app:iconTint="@color/white"
-        app:rippleColor="@color/white" 
-        android:gravity="center"/>
+        app:rippleColor="@color/white" />
 
     <Button
         android:id="@+id/button"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/boldthick"

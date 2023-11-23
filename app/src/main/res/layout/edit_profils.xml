@@ -10,41 +10,42 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="93dp"
+        android:background="@color/bluesky"
         android:orientation="horizontal">
 
         <ImageButton
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/white"
             android:contentDescription="@string/btnback"
-            android:scaleType="fitCenter"
-            android:background="@color/white"/>
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/boldthick"
-            android:layout_marginStart="30dp"
             android:hint="@string/mon_profil"
             android:textColor="@color/black"
-            android:textSize="25sp"
             android:textColorHighlight="@color/black"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:textSize="25sp" />
 
         <ImageButton
             android:id="@+id/BtnEdit"
-            android:layout_width="48dp"
+            android:layout_width="30dp"
             android:layout_height="48dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            app:srcCompat="@drawable/confimer"
-            android:scaleType="fitCenter"
+            android:background="@color/bluesky"
             android:contentDescription="@string/btnedit"
-            android:background="@color/white"/>
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/confimer" />
     </LinearLayout>
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -67,7 +68,7 @@
         android:textColor="@color/black"
         android:gravity="center"
         android:textSize="25sp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:textStyle="bold"/>
 
     <TextView
@@ -78,7 +79,9 @@
         android:text="@string/bio"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
         android:textStyle="bold"/>
 
     <com.google.android.material.textfield.TextInputEditText
@@ -88,8 +91,9 @@
         android:background="@color/white"
         android:fontFamily="@font/arial"
         android:hint="@string/bio"
+        android:layout_marginStart="15dp"
         android:textColor="@color/black"
-        android:visibility="gone"/>
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/classe"
@@ -99,14 +103,17 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:fontFamily="@font/arial"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
         android:textStyle="bold"/>
 
     <Spinner
         android:id="@+id/class_select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:layout_marginStart="15dp"
+        android:visibility="visible"/>
 
 
 
@@ -118,7 +125,9 @@
         android:text="@string/id_email"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:visibility="gone"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:visibility="visible"
         android:textStyle="bold"/>
 
 
@@ -129,16 +138,16 @@
         android:fontFamily="@font/arial"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:visibility="gone"/>
+        android:layout_marginStart="15dp"
+        android:visibility="visible"/>
 
 
     <ProgressBar
         android:id="@+id/progessBar1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:layout_gravity="center">
-    </ProgressBar>
+        android:layout_gravity="center"
+        android:visibility="gone"></ProgressBar>
 
     <TextView
         android:id="@+id/club"
@@ -148,7 +157,9 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:fontFamily="@font/arial"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -168,7 +179,9 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:fontFamily="@font/arial"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
         android:textStyle="bold"/>
 
     <com.google.android.material.textfield.TextInputEditText
@@ -179,7 +192,8 @@
         android:fontFamily="@font/arial"
         android:hint="@string/hobbies"
         android:textColor="@color/black"
-        android:visibility="gone"/>
+        android:layout_marginStart="15dp"
+        android:visibility="visible"/>
 
     <TextView
         android:id="@+id/res_so"
@@ -189,7 +203,9 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:fontFamily="@font/arial"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
         android:textStyle="bold"/>
 
 </LinearLayout>

@@ -15,8 +15,8 @@
 
         <ImageButton
             android:id="@+id/Btnback"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
             app:srcCompat="@drawable/backbutton"
@@ -28,25 +28,25 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/boldthick"
-            android:layout_marginStart="30dp"
             android:hint="@string/mon_profil"
             android:textColor="@color/black"
-            android:textSize="25sp"
             android:textColorHighlight="@color/black"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/BtnEdit"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="70dp"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            app:srcCompat="@drawable/editbutton"
-            android:scaleType="fitCenter"
+            android:background="@color/white"
             android:contentDescription="@string/btnedit"
-            android:background="@color/white"/>
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/editbutton" />
     </LinearLayout>
 
     <ImageView
