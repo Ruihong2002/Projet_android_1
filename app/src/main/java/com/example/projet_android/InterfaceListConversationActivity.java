@@ -18,7 +18,7 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
     ImageButton aBtnProfil;
     Button aBtnBack;
     RecyclerView aRecyclerView;
-    List<Profil> aProfil;
+    List<Profil> aListProfil;
 
 
     @Override
@@ -30,7 +30,7 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
         aBtnProfil =findViewById(R.id.imageButtonMonProfil2);
         aRecyclerView=findViewById(R.id.list_conversation);
 
-        aProfil= new ArrayList<Profil>();
+        aListProfil= new ArrayList<Profil>();
 
         aBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

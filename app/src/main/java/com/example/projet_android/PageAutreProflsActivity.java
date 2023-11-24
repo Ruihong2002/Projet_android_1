@@ -19,18 +19,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 public class PageAutreProflsActivity extends AppCompatActivity {
 
 
     ImageButton aBtnBack;
     FirebaseFirestore aDatabase;
-    TextView aTextId,aTextEmail,aTextBio,aTextClasse,aTextClub,aTextLoisir;
+    TextView aTextId,aTextEmail,aTextBio,aTextClasse,aTextClub,aTextLoisir,aTextSendMessage,aTextAddFavorite;
     TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
     ProgressBar aProgressBar;
     ImageView aPdP;
     Profil aProfil;
     Bundle aBundle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,8 @@ public class PageAutreProflsActivity extends AppCompatActivity {
         aTextClasse=findViewById(R.id.classe_data);
         aTextClub=findViewById(R.id.club_data);
         aTextLoisir=findViewById(R.id.hobbies_data);
+        aTextSendMessage=findViewById(R.id.send_msg);
+        aTextAddFavorite=findViewById(R.id.add_favorite);
 
         aBundle=getIntent().getExtras();
         aProfil=new Profil(aBundle.getString("profil_nom"),aBundle.getString("profil_name"),aBundle.getString("profil_email"),R.drawable.avatar_base);
@@ -113,5 +116,19 @@ public class PageAutreProflsActivity extends AppCompatActivity {
 
         });
 
+        aTextSendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        aTextAddFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentFavori=new Intent(getApplicationContext(), InterfaceListConversationActivity.class);
+                intentFavori.putExtra("Favori_email",aProfil.getaEmail());
+            }
+        });
     }
 }

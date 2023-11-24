@@ -10,49 +10,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="111dp"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/Btnback"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
-            app:srcCompat="@drawable/backbutton"
+            android:layout_marginTop="15dp"
+            android:background="@color/white"
             android:contentDescription="@string/btnback"
             android:scaleType="fitCenter"
-            android:background="@color/white"/>
+            app:srcCompat="@drawable/backbutton" />
 
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/otheruserpdp"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="70dp"
             android:layout_marginTop="10dp"
             android:contentDescription="@string/pdp"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/avatar_base" />
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="10dp">
 
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:contentDescription="@string/favoris"
-            android:id="@+id/favoris"
-            android:layout_marginStart="30dp"
-            app:srcCompt="@drawable/epingler"
-            android:scaleType="fitCenter" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,18 +49,19 @@
             android:id="@+id/add_favorite"
             android:textColor="@color/black"
             android:fontFamily="@font/arial"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="35dp"
             android:textSize="12sp"
             android:text="@string/add_favorite"/>
-
         <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/favoris"
-            android:id="@+id/sendImage"
-            android:layout_marginStart="100dp"
+            android:id="@+id/favoris"
+            android:layout_marginStart="10dp"
             app:srcCompt="@drawable/epingler"
             android:scaleType="fitCenter" />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,10 +69,20 @@
             android:id="@+id/send_msg"
             android:textColor="@color/black"
             android:fontFamily="@font/arial"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="100dp"
             android:textSize="12sp"
             android:text="@string/send_message"/>
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/send_message"
+            android:id="@+id/sendMessage"
+            app:srcCompt="@drawable/message_logo"
+            android:scaleType="fitCenter"
+            android:visibility="visible"/>
 
 
     </LinearLayout>
