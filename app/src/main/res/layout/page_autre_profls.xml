@@ -59,7 +59,7 @@
             android:contentDescription="@string/favoris"
             android:id="@+id/favoris"
             android:layout_marginStart="10dp"
-            app:srcCompt="@drawable/epingler"
+            app:srcCompat="@drawable/epingler"
             android:scaleType="fitCenter" />
 
 
@@ -80,7 +80,7 @@
             android:layout_marginStart="10dp"
             android:contentDescription="@string/send_message"
             android:id="@+id/sendMessage"
-            app:srcCompt="@drawable/message_logo"
+            app:srcCompat="@drawable/message_logo"
             android:scaleType="fitCenter"
             android:visibility="visible"/>
 

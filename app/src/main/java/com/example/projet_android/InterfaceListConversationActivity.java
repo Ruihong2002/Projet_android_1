@@ -48,10 +48,10 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
 
 
 // ici aProfil va etre rempli avec la firebase.
-        aProfil.add(new Profil("Zhang","Laurent","email",R.drawable.logo_complet));
-        aProfil.add(new Profil("cadz","cdzq","email",R.drawable.logo_complet));
+        aListProfil.add(new Profil("Zhang","Laurent","email",R.drawable.logo_complet));
+        aListProfil.add(new Profil("cadz","cdzq","email",R.drawable.logo_complet));
 
         aRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        aRecyclerView.setAdapter(new MyAdapter(getApplicationContext(),aProfil));
+        aRecyclerView.setAdapter(new MyAdapter(getApplicationContext(),aListProfil));
     }
 }
