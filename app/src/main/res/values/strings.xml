@@ -27,6 +27,9 @@
     <string name="logo">logo</string>
     <string name="conversation">conversation</string>
     <string name="profil_other">profil_other</string>
+    <string name="favoris">favoris</string>
+    <string name="add_favorite">add favorite</string>
+    <string name="send_message">send message</string>
 
     <string-array name="ListeClasse">
         <item>Class</item>
