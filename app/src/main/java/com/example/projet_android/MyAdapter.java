@@ -13,16 +13,19 @@ public class MyAdapter extends RecyclerView.Adapter<List_Profil> {
 
     Context context;
     List<Profil> aProfil;
-    public MyAdapter(Context context, List<Profil> pProfil) {
+    private final RecyclerViewInterface recyclerViewInterface;
+
+    public MyAdapter(Context context, List<Profil> pProfil,RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.aProfil = pProfil;
+        this.recyclerViewInterface=recyclerViewInterface;
     }
 
 
     @NonNull
     @Override
     public List_Profil onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new List_Profil(LayoutInflater.from(context).inflate(R.layout.personne_view,parent,false));
+        return new List_Profil(LayoutInflater.from(context).inflate(R.layout.personne_view,parent,false), recyclerViewInterface);
     }
 
     @Override

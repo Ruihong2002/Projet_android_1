@@ -7,7 +7,7 @@ public class Profil {
     String aEmail;
     int aPdP;
 
-    public String getaEmail() {
+    public String getEmail() {
         return aEmail;
     }
 

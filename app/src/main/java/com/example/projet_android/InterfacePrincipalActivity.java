@@ -39,7 +39,7 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("profil_nom",pProfil.getPersonNom());
                 bundle.putString("profil_name",pProfil.getPersonPrenom());
-                bundle.putString("profil_email",pProfil.getaEmail());
+                bundle.putString("profil_email",pProfil.getEmail());
                 it.putExtras(bundle);
                 startActivity(it);
                 finish();

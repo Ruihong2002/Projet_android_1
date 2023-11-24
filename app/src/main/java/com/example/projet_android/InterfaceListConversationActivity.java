@@ -9,16 +9,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InterfaceListConversationActivity extends AppCompatActivity {
+public class InterfaceListConversationActivity extends AppCompatActivity  implements  RecyclerViewInterface{
 
     ImageButton aBtnProfil;
     Button aBtnBack;
     RecyclerView aRecyclerView;
     List<Profil> aListProfil;
+    String aFavoriEmail,aFavoriNom,aFavoriPrenom;
+    Bundle aBundle;
 
 
     @Override
@@ -29,8 +32,12 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
         aBtnBack = findViewById(R.id.button6);
         aBtnProfil =findViewById(R.id.imageButtonMonProfil2);
         aRecyclerView=findViewById(R.id.list_conversation);
+        aBundle=getIntent().getExtras();
 
         aListProfil= new ArrayList<Profil>();
+        /*aFavoriEmail=aBundle.getString("Favori_email");
+        aFavoriPrenom = aBundle.getString("Favori_Prenom");
+        aFavoriNom = aBundle.getString("Favori_Nom");*/
 
         aBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -48,10 +55,24 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
 
 
 // ici aProfil va etre rempli avec la firebase.
-        aListProfil.add(new Profil("Zhang","Laurent","email",R.drawable.logo_complet));
+        //aListProfil.add(new Profil(aFavoriNom,aFavoriPrenom,aFavoriEmail,R.drawable.logo_complet));
         aListProfil.add(new Profil("cadz","cdzq","email",R.drawable.logo_complet));
+        aListProfil.add(new Profil("Tran","Patrick","patrick.tran@edu.esiee.fr",R.drawable.logo_complet));
 
         aRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        aRecyclerView.setAdapter(new MyAdapter(getApplicationContext(),aListProfil));
+        aRecyclerView.setAdapter(new MyAdapter(getApplicationContext(),aListProfil,this));
+
+    }
+
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent=new Intent(getApplicationContext(), PageAutreProflsActivity.class);
+        Bundle vAffProfil=new Bundle();
+        vAffProfil.putString("profil_email",aListProfil.get(position).getEmail());
+        vAffProfil.putString("profil_name",aListProfil.get(position).getPersonPrenom());
+        vAffProfil.putString("profil_nom",aListProfil.get(position).getPersonNom());
+        intent.putExtras(vAffProfil);
+        startActivity(intent);
     }
 }

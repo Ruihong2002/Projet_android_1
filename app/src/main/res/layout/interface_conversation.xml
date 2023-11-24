@@ -1,77 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InterfaceListConversationActivity">
+    tools:context=".InterfaceListConversationActivity"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imageButtonMonProfil2"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white"
+                    android:visibility="visible"
+                    android:contentDescription="@string/mon_profil"
+                    android:scaleType="centerInside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/Cercle"
+                    tools:srcCompat="@drawable/avatar_base" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="55dp"
+                    android:contentDescription="@string/conversation"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo_complet"
+                    tools:visibility="visible" />
+
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/bluesky"
+                    android:fontFamily="@font/boldthick"
+                    android:hint="@string/back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
-            android:layout_width="380dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
             android:icon="@drawable/baseline_search_24"
             android:visibility="visible"
             app:actionViewClass="android.widget.SearchView"
             app:iconifiedByDefault="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.516"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:queryHint="Search for a profile..."
             android:fontFamily="@font/arial"/>
-
-        <ImageButton
-            android:id="@+id/imageButtonMonProfil2"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/favorite"
+            android:fontFamily="@font/arial"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:contentDescription="@string/mon_profil"
-            android:scaleType="centerInside"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/Cercle"
-            tools:srcCompat="@drawable/avatar_base" />
+            android:layout_marginTop="20dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_conversation"
-            android:layout_width="369dp"
-            android:layout_height="310dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="112dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button6" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/conversation"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo_complet"
-            tools:visibility="visible" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
+            android:id="@+id/list_favori"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/bluesky"
-            android:fontFamily="@font/boldthick"
-            android:hint="@string/back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@string/last_conversation"
+            android:fontFamily="@font/arial"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_conversation"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
 

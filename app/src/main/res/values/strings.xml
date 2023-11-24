@@ -31,6 +31,8 @@
     <string name="favoris">favoris</string>
     <string name="add_favorite">add favorite</string>
     <string name="send_message">send message</string>
+    <string name="favorite">Favorite</string>
+    <string name="last_conversation">Last Conversation</string>
 
     <string-array name="ListeClasse">
         <item>Class</item>

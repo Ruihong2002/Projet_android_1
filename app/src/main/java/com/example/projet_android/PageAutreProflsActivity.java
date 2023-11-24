@@ -14,12 +14,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
 
 public class PageAutreProflsActivity extends AppCompatActivity {
 
@@ -59,16 +56,13 @@ public class PageAutreProflsActivity extends AppCompatActivity {
         aProfil=new Profil(aBundle.getString("profil_nom"),aBundle.getString("profil_name"),aBundle.getString("profil_email"),R.drawable.avatar_base);
 
         aDatabase= FirebaseFirestore.getInstance();
-        aDatabase.collection("utilisateur").whereEqualTo("Email",aProfil.getaEmail()).get()
+        aDatabase.collection("utilisateur").whereEqualTo("Email",aProfil.getEmail()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        Toast.makeText(PageAutreProflsActivity.this,"Nom="+aProfil.getPersonNom(),Toast.LENGTH_SHORT).show();
-                        Toast.makeText(PageAutreProflsActivity.this,"Prenom="+aProfil.getPersonPrenom(),Toast.LENGTH_SHORT).show();
                         if (task.isSuccessful()) {
                             Toast.makeText(PageAutreProflsActivity.this,"succes",Toast.LENGTH_SHORT).show();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Toast.makeText(PageAutreProflsActivity.this,"test"+document.toString(),Toast.LENGTH_SHORT).show();
                                 String vPrenom = document.get("First Name").toString();
                                 String vNom = document.get("Last Name").toString();
                                 String vEmail = document.get("Email").toString();
@@ -111,9 +105,6 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                 startActivity(it);
                 finish();
             }
-
-
-
         });
 
         aTextSendMessage.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +118,12 @@ public class PageAutreProflsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentFavori=new Intent(getApplicationContext(), InterfaceListConversationActivity.class);
-                intentFavori.putExtra("Favori_email",aProfil.getaEmail());
+                Bundle vFavori=new Bundle();
+                vFavori.putString("Favori_email",aProfil.getEmail());
+                vFavori.putString("Favori_Prenom",aProfil.getPersonPrenom());
+                vFavori.putString("Favori_Nom",aProfil.getPersonNom());
+                intentFavori.putExtras(vFavori);
+                aTextAddFavorite.setText("Favorite Added");
             }
         });
     }
