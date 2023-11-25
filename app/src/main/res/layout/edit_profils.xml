@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="93dp"
-        android:background="@color/bluesky"
+        android:background="@color/material_dynamic_primary20"
         android:orientation="horizontal">
 
         <ImageButton
@@ -25,15 +25,15 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="169dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="55dp"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/boldthick"
             android:hint="@string/mon_profil"
             android:textColor="@color/black"
             android:textColorHighlight="@color/black"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/white"
             android:textSize="25sp" />
 
         <ImageButton
@@ -42,7 +42,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
-            android:background="@color/bluesky"
+            android:background="@color/material_dynamic_primary20"
             android:contentDescription="@string/btnedit"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/confimer" />
@@ -199,13 +199,13 @@
         android:id="@+id/res_so"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/arial"
         android:text="@string/RS"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:fontFamily="@font/arial"
-        android:visibility="visible"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="35dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:visibility="visible" />
 
 </LinearLayout>

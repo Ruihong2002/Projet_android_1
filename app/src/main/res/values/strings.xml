@@ -6,7 +6,7 @@
     <string name="password">Password</string>
     <string name="test">Interface</string>
     <string name="creer">CREATE</string>
-    <string name="mon_profil">My profiles</string>
+    <string name="mon_profil">My profile</string>
     <string name="retour">back</string>
     <string name="Start">Start</string>
     <string name="Btn_conv">Conversation</string>
@@ -32,6 +32,7 @@
     <string name="add_favorite">add favorite</string>
     <string name="send_message">send message</string>
     <string name="favorite">Favorite</string>
+    <string name="Type_a_message">Favorite</string>
     <string name="last_conversation">Last Conversation</string>
 
     <string-array name="ListeClasse">
