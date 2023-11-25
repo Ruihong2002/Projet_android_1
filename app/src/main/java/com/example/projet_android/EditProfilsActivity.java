@@ -69,6 +69,7 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
     DatabaseReference aDbRef;
 
     TextInputEditText aTextGit,aTextSnap,aTextDiscord,aTextInsta,aTextWhatsapp,aTextLinkedIn;
+    Map<String,Object> aSocial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
         aAuth = FirebaseAuth.getInstance();
         aUser = aAuth.getCurrentUser();
 
+        aSocial=new HashMap<String,Object>();
 
         aBtnEdit = findViewById(R.id.BtnEdit);
 
@@ -153,12 +155,33 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                                 String pHobbies=document.get("Hobbies").toString();
                                 String pBio=document.get("Bio").toString();
                                 String vClub=document.get("Club").toString();
+                                aSocial= (Map<String, Object>) document.get("Social Network");
 
+                                if (aSocial.get("Snapchat").equals("snapchat")==false){
+                                    aTextSnap.setText(aSocial.get("Snapchat").toString());
+                                }
+                                if (aSocial.get("GitHub").equals("github")==false){
+                                    aTextGit.setText(aSocial.get("GitHub").toString());
+
+                                }
+                                if (aSocial.get("Discord").equals("discord")==false){
+                                    aTextDiscord.setText(aSocial.get("Discord").toString());
+                                }
+                                if (aSocial.get("Instagramm").equals("instagram")==false){
+                                    aTextInsta.setText(aSocial.get("Instagramm").toString());
+                                }
+                                if (aSocial.get("LinkedIn").equals("linkedin")==false){
+                                    aTextLinkedIn.setText(aSocial.get("LinkedIn").toString());
+                                }
+                                if (aSocial.get("Whatsapp").equals("whatsapp")==false){
+                                    aTextWhatsapp.setText(aSocial.get("Whatsapp").toString());
+                                }
                                 aTextId.setText(pPrenom + " " + pNom);
                                 aTextEmail.setText(pEmail);
                                 aHobbies.setText(pHobbies);
                                 aBio.setText(pBio);
                                 aTextClub.setText(vClub);
+
 
 
                                 aTextEmailAff.setVisibility(View.VISIBLE);
@@ -175,9 +198,6 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                                 aHobbies.setVisibility(View.VISIBLE);
                                 aBio.setVisibility(View.VISIBLE);
                                 aClasse.setVisibility(View.VISIBLE);
-
-
-
                             }
                         }
                     }
@@ -186,18 +206,58 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
             aBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String vHobbies,vBio,vEmail;
+                String vHobbies,vBio,vEmail,vDiscord,vSnap,vInsta,vGit,vLinked,vWhatsapp;
                 vHobbies=aHobbies.getText().toString();
                 vBio=aBio.getText().toString();
                 vEmail=aUser.getEmail();
+                vDiscord=aTextDiscord.getText().toString();
+                vSnap=aTextSnap.getText().toString();
+                vInsta=aTextInsta.getText().toString();
+                vGit =aTextGit.getText().toString();
+                vLinked=aTextLinkedIn.getText().toString();
+                vWhatsapp=aTextWhatsapp.getText().toString();
                 aClasse.setOnItemSelectedListener(EditProfilsActivity.this);
-                //if (TextUtils.isEmpty(vBio)==false) {
-                    UpdateProfil(vEmail,"Bio",vBio);
-                //}
-                //if (TextUtils.isEmpty(vHobbies)==false) {
-                    UpdateProfil(vEmail,"Hobbies",vHobbies);
-                //}
-                if (aImagePdP!=null) {
+                if (TextUtils.isEmpty(vDiscord)==false) {
+                    aSocial.replace("Discord",vDiscord);
+                }
+                else{
+                    aSocial.replace("Discord","discord");
+                }
+                if (TextUtils.isEmpty(vSnap)==false) {
+                    aSocial.replace("Snapchat",vSnap);
+                }
+                else{
+                    aSocial.replace("Snapchat","snapchat");
+                }
+                if (TextUtils.isEmpty(vInsta)==false) {
+                    aSocial.replace("Instagramm",vInsta);
+                }
+                else{
+                    aSocial.replace("Instagramm","instagram");
+                }
+                if (TextUtils.isEmpty(vGit)==false) {
+                    aSocial.replace("GitHub",vGit);
+                }
+                else{
+                    aSocial.replace("GitHub","github");
+                }
+                if (TextUtils.isEmpty(vLinked)==false) {
+                    aSocial.replace("LinkedIn",vLinked);
+                }
+                else{
+                    aSocial.replace("LinkedIn","linkedin");
+                }
+                if (TextUtils.isEmpty(vWhatsapp)==false) {
+                    aSocial.replace("Whatsapp",vWhatsapp);
+                }
+                else{
+                    aSocial.replace("Whatsapp","whatsapp");
+                }
+                UpdateProfil(vEmail,"Bio",vBio);
+                UpdateProfil(vEmail,"Hobbies",vHobbies);
+                UpdateProfil(vEmail,"Social Network",aSocial);
+
+                    if (aImagePdP!=null) {
                     uploadIntoStorage(aImagePdP);
                 }
                 Intent it = new Intent(getApplicationContext(), PageMonProfilActivity.class);
@@ -243,7 +303,7 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
         return vMTM.getExtensionFromMimeType(vContentResolver.getType(pUri));
     }
 
-    private void UpdateProfil(String pEmail, String pDataID, String pData){
+    private void UpdateProfil(String pEmail, String pDataID, Object pData){
         aDatabase=FirebaseFirestore.getInstance();
         Map<String,Object> userData=new HashMap<>();
         userData.put(pDataID,pData);

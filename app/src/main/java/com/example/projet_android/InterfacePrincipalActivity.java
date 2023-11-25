@@ -31,7 +31,7 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         aAuth=FirebaseAuth.getInstance();
         user = aAuth.getCurrentUser();
 
-        Profil pProfil=new Profil("Tran","Patrick","patrick.tran@edu.esiee.fr",R.drawable.logo_complet);
+        Profil pProfil=new Profil("Hzudb","Veudbd","laurent2002laurent@hotmail.com",R.drawable.logo_complet);
         aOtherProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

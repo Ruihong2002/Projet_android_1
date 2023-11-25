@@ -127,36 +127,36 @@ public class PageMonProfilActivity extends AppCompatActivity {
                             aTextLoisir.setText(vHobbies);
                             aTextClub.setText(vClub);
 
-                            /*if (vSocial.get("Snapchat")!="snapchat"){
+                            if (vSocial.get("Snapchat").equals("snapchat")==false){
                                 aTextSnap.setText(vSocial.get("Snapchat").toString());
                                 aTextSnap.setVisibility(View.VISIBLE);
                                 aImgSnap.setVisibility(View.VISIBLE);
                             }
-                            if (vSocial.get("GitHub")!="github"){
+                            if (vSocial.get("GitHub").equals("github")==false){
                                 aTextGit.setText(vSocial.get("GitHub").toString());
                                 aTextGit.setVisibility(View.VISIBLE);
                                 aImgGit.setVisibility(View.VISIBLE);
                             }
-                            if (vSocial.get("Discord")!="discord"){
+                            if (vSocial.get("Discord").equals("discord")==false){
                                 aTextDiscord.setText(vSocial.get("Discord").toString());
                                 aTextDiscord.setVisibility(View.VISIBLE);
                                 aImgDiscord.setVisibility(View.VISIBLE);
                             }
-                            if (vSocial.get("Instagramm")!="instagram"){
+                            if (vSocial.get("Instagramm").equals("instagram")==false){
                                 aTextInsta.setText(vSocial.get("Instagramm").toString());
                                 aTextInsta.setVisibility(View.VISIBLE);
                                 aImgInsta.setVisibility(View.VISIBLE);
                             }
-                            if (vSocial.get("LinkedIn")!="linkedin"){
+                            if (vSocial.get("LinkedIn").equals("linkedin")==false){
                                 aTextLinkedIn.setText(vSocial.get("LinkedIn").toString());
                                 aTextLinkedIn.setVisibility(View.VISIBLE);
                                 aImgLinkedIn.setVisibility(View.VISIBLE);
                             }
-                            if (vSocial.get("Whatsapp")!="whatsapp"){
+                            if (vSocial.get("Whatsapp").equals("whatsapp")==false){
                                 aTextWhatsapp.setText(vSocial.get("Whatsapp").toString());
                                 aTextWhatsapp.setVisibility(View.VISIBLE);
                                 aImgWhatsapp.setVisibility(View.VISIBLE);
-                            }*/
+                            }
 
                             aTextEmailAff.setVisibility(View.VISIBLE);
                             aTextClasseAff.setVisibility(View.VISIBLE);
