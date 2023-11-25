@@ -127,9 +127,11 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onActivityResult(ActivityResult result) {
                 if (result.getResultCode()== Activity.RESULT_OK){
+                    String vEmail=aUser.getEmail();
                     Intent data= result.getData();
                     aImagePdP=data.getData();
                     aPdP.setImageURI(aImagePdP);
+                    UpdateProfil(vEmail,"PdP",aPdP.toString());
                 }
             }
         });
@@ -270,7 +272,7 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
     private void uploadIntoStorage(Uri pUri) {
         String vEmail=aUser.getEmail();
         Toast.makeText(EditProfilsActivity.this,"uploading",Toast.LENGTH_SHORT).show();
-             StorageReference vImageRef=aStorageRef.child(System.currentTimeMillis()+"."+getFileExtention(pUri));
+             StorageReference vImageRef=aStorageRef.child("image/"+System.currentTimeMillis()+"."+getFileExtention(pUri));
              vImageRef.putFile(pUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                  @Override
                  public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -281,7 +283,7 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                              Model vModel=new Model(uri.toString());
                              String vModelID=aDbRef.push().getKey();
                              aDbRef.child(vModelID).setValue(vModel);
-                             UpdateProfil(vEmail,"PdP",vImageRef.getDownloadUrl().toString());
+                             UpdateProfil(vEmail,"PdP",uri);
                          }
                      });
                  }

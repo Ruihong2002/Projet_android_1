@@ -12,11 +12,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,9 +93,11 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                                 String vBio=document.get("Bio").toString();
                                 String vHobbies=document.get("Hobbies").toString();
                                 String vClass=document.get("Class").toString();
-                               // String vPdp=document.get("PdP").toString();
+                                String vPdp=document.get("PdP").toString();
                                 String vClub=document.get("Club").toString();
                                 Map<String,Object> vSocial= (Map<String, Object>) document.get("Social Network");
+
+                                Glide.with(PageAutreProflsActivity.this).load(vPdp).into(aPdP);
 
                                 if (!vSocial.get("Snapchat").equals("snapchat")){
                                     aTextSnap.setText(vSocial.get("Snapchat").toString());

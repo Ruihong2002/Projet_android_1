@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,9 +13,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import com.bumptech.glide.request.target.ViewTarget;
+import com.example.projet_android.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -87,8 +91,6 @@ public class PageMonProfilActivity extends AppCompatActivity {
 
 
         aStorageRef = FirebaseStorage.getInstance().getReference();
-        aPdPRef = aStorageRef.child("avatar_base.png");
-
 
         aDatabase=FirebaseFirestore.getInstance();
 
@@ -108,17 +110,7 @@ public class PageMonProfilActivity extends AppCompatActivity {
                                 String vClub=document.get("Club").toString();
                                 Map<String,Object> vSocial= (Map<String, Object>) document.get("Social Network");
 
-                                StorageReference imageRef = aStorageRef.child(vPdp);
-
-                                Glide.with(PageMonProfilActivity.this).load(imageRef).into(aPdP);
-                                imageRef.getDownloadUrl()
-                                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                                  @Override
-                                                                  public void onSuccess(Uri uri) {
-                                                                      aPdP.setImageURI(uri);
-                                                                      Log.d("uri:",uri.toString());
-                                                                  }
-                                                });
+                                Glide.with(PageMonProfilActivity.this).load(vPdp).into(aPdP);
 
                             aTextId.setText(vPrenom+" "+vNom);
                             aTextEmail.setText(vEmail);

@@ -36,6 +36,8 @@
     <string name="last_conversation">Last Conversation</string>
     <string name="recherche">Recherche</string>
     <string name="logo_linkedin">logo linkedIn</string>
+    <string name="bouton_recheche">bouton_recheche</string>
+    <string name="groupe">groupe</string>
 
     <string-array name="ListeClasse">
         <item>Class</item>
