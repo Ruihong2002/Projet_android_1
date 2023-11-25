@@ -157,26 +157,26 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                                 String vClub=document.get("Club").toString();
                                 aSocial= (Map<String, Object>) document.get("Social Network");
 
-                                if (aSocial.get("Snapchat").equals("snapchat")==false){
+                                if (!aSocial.get("Snapchat").equals("snapchat")){
                                     aTextSnap.setText(aSocial.get("Snapchat").toString());
                                 }
-                                if (aSocial.get("GitHub").equals("github")==false){
+                                if (!aSocial.get("GitHub").equals("github")){
                                     aTextGit.setText(aSocial.get("GitHub").toString());
 
                                 }
-                                if (aSocial.get("Discord").equals("discord")==false){
+                                if (!aSocial.get("Discord").equals("discord")){
                                     aTextDiscord.setText(aSocial.get("Discord").toString());
                                 }
-                                if (aSocial.get("Instagramm").equals("instagram")==false){
+                                if (!aSocial.get("Instagramm").equals("instagram")){
                                     aTextInsta.setText(aSocial.get("Instagramm").toString());
                                 }
-                                if (aSocial.get("LinkedIn").equals("linkedin")==false){
+                                if (!aSocial.get("LinkedIn").equals("linkedin")){
                                     aTextLinkedIn.setText(aSocial.get("LinkedIn").toString());
                                 }
-                                if (aSocial.get("Whatsapp").equals("whatsapp")==false){
+                                if (!aSocial.get("Whatsapp").equals("whatsapp")){
                                     aTextWhatsapp.setText(aSocial.get("Whatsapp").toString());
                                 }
-                                aTextId.setText(pPrenom + " " + pNom);
+                                aTextId.setText(pPrenom+" "+pNom);
                                 aTextEmail.setText(pEmail);
                                 aHobbies.setText(pHobbies);
                                 aBio.setText(pBio);
@@ -206,10 +206,11 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
             aBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String vHobbies,vBio,vEmail,vDiscord,vSnap,vInsta,vGit,vLinked,vWhatsapp;
+                String vHobbies,vBio,vEmail,vDiscord,vSnap,vInsta,vGit,vLinked,vWhatsapp,vClub;
                 vHobbies=aHobbies.getText().toString();
                 vBio=aBio.getText().toString();
                 vEmail=aUser.getEmail();
+                vClub=aTextClub.getText().toString();
                 vDiscord=aTextDiscord.getText().toString();
                 vSnap=aTextSnap.getText().toString();
                 vInsta=aTextInsta.getText().toString();
@@ -217,37 +218,37 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                 vLinked=aTextLinkedIn.getText().toString();
                 vWhatsapp=aTextWhatsapp.getText().toString();
                 aClasse.setOnItemSelectedListener(EditProfilsActivity.this);
-                if (TextUtils.isEmpty(vDiscord)==false) {
+                if (!TextUtils.isEmpty(vDiscord)) {
                     aSocial.replace("Discord",vDiscord);
                 }
                 else{
                     aSocial.replace("Discord","discord");
                 }
-                if (TextUtils.isEmpty(vSnap)==false) {
+                if (!TextUtils.isEmpty(vSnap)) {
                     aSocial.replace("Snapchat",vSnap);
                 }
                 else{
                     aSocial.replace("Snapchat","snapchat");
                 }
-                if (TextUtils.isEmpty(vInsta)==false) {
+                if (!TextUtils.isEmpty(vInsta)) {
                     aSocial.replace("Instagramm",vInsta);
                 }
                 else{
                     aSocial.replace("Instagramm","instagram");
                 }
-                if (TextUtils.isEmpty(vGit)==false) {
+                if (!TextUtils.isEmpty(vGit)) {
                     aSocial.replace("GitHub",vGit);
                 }
                 else{
                     aSocial.replace("GitHub","github");
                 }
-                if (TextUtils.isEmpty(vLinked)==false) {
+                if (!TextUtils.isEmpty(vLinked)) {
                     aSocial.replace("LinkedIn",vLinked);
                 }
                 else{
                     aSocial.replace("LinkedIn","linkedin");
                 }
-                if (TextUtils.isEmpty(vWhatsapp)==false) {
+                if (!TextUtils.isEmpty(vWhatsapp)) {
                     aSocial.replace("Whatsapp",vWhatsapp);
                 }
                 else{
@@ -256,6 +257,7 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                 UpdateProfil(vEmail,"Bio",vBio);
                 UpdateProfil(vEmail,"Hobbies",vHobbies);
                 UpdateProfil(vEmail,"Social Network",aSocial);
+                UpdateProfil(vEmail,"Club",vClub);
 
                     if (aImagePdP!=null) {
                     uploadIntoStorage(aImagePdP);
