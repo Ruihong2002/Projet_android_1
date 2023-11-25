@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,10 +90,18 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     user.put("Email",email);
                                     user.put("Hobbies","Hobbies");
                                     user.put("Bio","Biography");
-                                    user.put("Class","class");
+                                    user.put("Class","Class");
+                                    user.put("PdP","avatar_base.png");
+                                    user.put("Club","Club");
+                                    Map<String,Object> userSocialNetwork=new HashMap<>();
+                                    userSocialNetwork.put("LinkedIn","");
+                                    userSocialNetwork.put("Discord","");
+                                    userSocialNetwork.put("GitHub","");
+                                    userSocialNetwork.put("Snapchat","");
+                                    userSocialNetwork.put("Instagramm","");
+                                    user.put("Social Network",userSocialNetwork);
 
                                     db.collection("utilisateur").add(user);
-
                                 } else {
                                     Toast.makeText(CreateAccountActivity.this, "Account Creation Failed.",
                                             Toast.LENGTH_SHORT).show();
@@ -103,6 +112,5 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
 
     }
-
 
 }

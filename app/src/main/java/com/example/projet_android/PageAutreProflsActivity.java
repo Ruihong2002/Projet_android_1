@@ -18,6 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PageAutreProflsActivity extends AppCompatActivity {
 
 
@@ -25,15 +28,16 @@ public class PageAutreProflsActivity extends AppCompatActivity {
     FirebaseFirestore aDatabase;
     TextView aTextId,aTextEmail,aTextBio,aTextClasse,aTextClub,aTextLoisir,aTextSendMessage,aTextAddFavorite;
     TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
-    ProgressBar aProgressBar;
     ImageView aPdP;
     Profil aProfil;
     Bundle aBundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_autre_profls);
         aBtnBack=findViewById(R.id.Btnback);
+
 
         aTextId=findViewById(R.id.identite_other);
         aTextEmail=findViewById(R.id.email_data);
@@ -44,7 +48,7 @@ public class PageAutreProflsActivity extends AppCompatActivity {
         aTextRSAff=findViewById(R.id.res_so_other);
         aTextBioAff=findViewById(R.id.biographie_other);
         aPdP=findViewById(R.id.otheruserpdp);
-        aProgressBar=findViewById(R.id.progessBar1);
+
         aTextBio=findViewById(R.id.bio_data);
         aTextClasse=findViewById(R.id.classe_data);
         aTextClub=findViewById(R.id.club_data);
@@ -69,14 +73,16 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                                 String vBio = document.get("Bio").toString();
                                 String vHobbies = document.get("Hobbies").toString();
                                 String vClass = document.get("Class").toString();
+                                String vClub = document.get("Club").toString();
 
                                 aTextId.setText(vPrenom + " " + vNom);
                                 aTextEmail.setText(vEmail);
                                 aTextClasse.setText(vClass);
                                 aTextBio.setText(vBio);
-                                aTextLoisir.setText(vHobbies);}
+                                aTextLoisir.setText(vHobbies);
+                                aTextClub.setText(vClub);
 
-                                aProgressBar.setVisibility(View.GONE);
+
                                 aTextEmailAff.setVisibility(View.VISIBLE);
                                 aTextClasseAff.setVisibility(View.VISIBLE);
                                 aTextLoisirAff.setVisibility(View.VISIBLE);
@@ -91,7 +97,7 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                                 aTextClasse.setVisibility(View.VISIBLE);
                                 aTextClub.setVisibility(View.VISIBLE);
                                 aTextLoisir.setVisibility(View.VISIBLE);
-
+                            }
                         }
                     }
                 });

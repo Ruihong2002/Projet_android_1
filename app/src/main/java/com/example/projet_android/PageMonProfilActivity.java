@@ -4,8 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -13,13 +19,33 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class PageMonProfilActivity extends AppCompatActivity {
 
@@ -28,11 +54,10 @@ public class PageMonProfilActivity extends AppCompatActivity {
     ImageButton aBtnBack,aBtnEdit;
     TextView aTextId,aTextEmail,aTextBio,aTextClasse,aTextClub,aTextLoisir;
     TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
-    ProgressBar aProgressBar;
     ImageView aPdP;
     FirebaseFirestore aDatabase;
+    StorageReference aStorageRef,aPdPRef;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +66,7 @@ public class PageMonProfilActivity extends AppCompatActivity {
         aAuth=FirebaseAuth.getInstance();
         aUser=aAuth.getCurrentUser();
 
-        aBtnBack = findViewById(R.id.Btnback);
+        aBtnBack=findViewById(R.id.Btnback);
         aBtnEdit=findViewById(R.id.BtnEdit);
         aTextId=findViewById(R.id.identite);
         aTextEmail=findViewById(R.id.email_edit);
@@ -51,12 +76,16 @@ public class PageMonProfilActivity extends AppCompatActivity {
         aTextClubAff=findViewById(R.id.club);
         aTextRSAff=findViewById(R.id.res_so);
         aTextBioAff=findViewById(R.id.biographie);
-        aPdP=findViewById(R.id.userpdp);
-        aProgressBar=findViewById(R.id.progessBar1);
+        aPdP=(ImageView) findViewById(R.id.userpdp);
+
         aTextBio=findViewById(R.id.bio_change);
         aTextClasse=findViewById(R.id.classe_edit);
         aTextClub=findViewById(R.id.club_edit);
         aTextLoisir=findViewById(R.id.hobbies_edit);
+
+        aStorageRef = FirebaseStorage.getInstance().getReference();
+        aPdPRef = aStorageRef.child("avatar_base.png");
+
 
         aDatabase=FirebaseFirestore.getInstance();
 
@@ -66,25 +95,36 @@ public class PageMonProfilActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                String pPrenom = document.get("First Name").toString();
+                                String vPrenom = document.get("First Name").toString();
+                                String vNom=document.get("Last Name").toString();
+                                String vEmail=document.get("Email").toString();
+                                String vBio=document.get("Bio").toString();
+                                String vHobbies=document.get("Hobbies").toString();
+                                String vClass=document.get("Class").toString();
+                                String vPdp=document.get("PdP").toString();
+                                String vClub=document.get("Club").toString();
 
-                                String pNom=document.get("Last Name").toString();
+                                StorageReference imageRef = aStorageRef.child(vPdp);
 
-                                String pEmail=document.get("Email").toString();
+                                ViewTarget<ImageView, Drawable> aTest = Glide.with(PageMonProfilActivity.this).load(imageRef).into(aPdP);
+                                Log.d("Glide:",aTest.toString());
+                                imageRef.getDownloadUrl()
+                                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                  @Override
+                                                                  public void onSuccess(Uri uri) {
+                                                                      aPdP.setImageURI(uri);
+                                                                      Log.d("uri:",uri.toString());
+                                                                  }
+                                                });
 
-                                String pBio=document.get("Bio").toString();
+                            aTextId.setText(vPrenom+" "+vNom);
+                            aTextEmail.setText(vEmail);
+                            aTextClasse.setText(vClass);
+                            aTextBio.setText(vBio);
+                            aTextLoisir.setText(vHobbies);
 
-                                String pHobbies=document.get("Hobbies").toString();
+                            aTextClub.setText(vClub);
 
-                                String pClass=document.get("Class").toString();
-
-                            aTextId.setText(pPrenom+" "+pNom);
-                            aTextEmail.setText(pEmail);
-                            aTextClasse.setText(pClass);
-                            aTextBio.setText(pBio);
-                            aTextLoisir.setText(pHobbies);
-
-                            aProgressBar.setVisibility(View.GONE);
                             aTextEmailAff.setVisibility(View.VISIBLE);
                             aTextClasseAff.setVisibility(View.VISIBLE);
                             aTextLoisirAff.setVisibility(View.VISIBLE);
@@ -103,8 +143,6 @@ public class PageMonProfilActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
 
         aBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

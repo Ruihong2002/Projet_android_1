@@ -18,9 +18,8 @@ public class InterfaceListConversationActivity extends AppCompatActivity  implem
 
     ImageButton aBtnProfil;
     Button aBtnBack;
-    RecyclerView aRecyclerView;
-    List<Profil> aListProfil;
-    String aFavoriEmail,aFavoriNom,aFavoriPrenom;
+    RecyclerView aRecyclerView,aFavoriRecyclerView;
+    List<Profil> aListProfil,aListFavori;
     Bundle aBundle;
 
 
@@ -33,11 +32,9 @@ public class InterfaceListConversationActivity extends AppCompatActivity  implem
         aBtnProfil =findViewById(R.id.imageButtonMonProfil2);
         aRecyclerView=findViewById(R.id.list_conversation);
         aBundle=getIntent().getExtras();
-
+        aFavoriRecyclerView=findViewById(R.id.list_favori);
+        aListFavori=new ArrayList<Profil>();
         aListProfil= new ArrayList<Profil>();
-        /*aFavoriEmail=aBundle.getString("Favori_email");
-        aFavoriPrenom = aBundle.getString("Favori_Prenom");
-        aFavoriNom = aBundle.getString("Favori_Nom");*/
 
         aBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -55,9 +52,8 @@ public class InterfaceListConversationActivity extends AppCompatActivity  implem
 
 
 // ici aProfil va etre rempli avec la firebase.
-        //aListProfil.add(new Profil(aFavoriNom,aFavoriPrenom,aFavoriEmail,R.drawable.logo_complet));
         aListProfil.add(new Profil("cadz","cdzq","email",R.drawable.logo_complet));
-        aListProfil.add(new Profil("Tran","Patrick","patrick.tran@edu.esiee.fr",R.drawable.logo_complet));
+        aListFavori.add(new Profil("Tran","Patrick","patrick.tran@edu.esiee.fr",R.drawable.logo_complet));
 
         aRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         aRecyclerView.setAdapter(new MyAdapter(getApplicationContext(),aListProfil,this));
