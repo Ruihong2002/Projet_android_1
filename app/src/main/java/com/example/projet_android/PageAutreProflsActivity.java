@@ -18,6 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PageAutreProflsActivity extends AppCompatActivity {
 
 
@@ -25,15 +28,18 @@ public class PageAutreProflsActivity extends AppCompatActivity {
     FirebaseFirestore aDatabase;
     TextView aTextId,aTextEmail,aTextBio,aTextClasse,aTextClub,aTextLoisir,aTextSendMessage,aTextAddFavorite;
     TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
-    ProgressBar aProgressBar;
     ImageView aPdP;
     Profil aProfil;
     Bundle aBundle;
+    TextView aTextGit,aTextSnap,aTextDiscord,aTextInsta,aTextWhatsapp,aTextLinkedIn;
+    ImageView aImgGit,aImgSnap,aImgDiscord,aImgInsta,aImgWhatsapp,aImgLinkedIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_autre_profls);
         aBtnBack=findViewById(R.id.Btnback);
+
 
         aTextId=findViewById(R.id.identite_other);
         aTextEmail=findViewById(R.id.email_data);
@@ -44,13 +50,29 @@ public class PageAutreProflsActivity extends AppCompatActivity {
         aTextRSAff=findViewById(R.id.res_so_other);
         aTextBioAff=findViewById(R.id.biographie_other);
         aPdP=findViewById(R.id.otheruserpdp);
-        aProgressBar=findViewById(R.id.progessBar1);
+
         aTextBio=findViewById(R.id.bio_data);
         aTextClasse=findViewById(R.id.classe_data);
         aTextClub=findViewById(R.id.club_data);
         aTextLoisir=findViewById(R.id.hobbies_data);
         aTextSendMessage=findViewById(R.id.send_msg);
         aTextAddFavorite=findViewById(R.id.add_favorite);
+
+
+        aTextGit=findViewById(R.id.userGitHub);
+        aTextSnap=findViewById(R.id.userSnapChat);
+        aTextDiscord=findViewById(R.id.userDiscord);
+        aTextInsta=findViewById(R.id.userInstagramm);
+        aTextWhatsapp=findViewById(R.id.userWhatsapp);
+        aTextLinkedIn=findViewById(R.id.userLinkedIn);
+
+        aImgGit=findViewById(R.id.imgGithub);
+        aImgSnap=findViewById(R.id.imgSnap);
+        aImgDiscord=findViewById(R.id.imgDiscord);
+        aImgInsta=findViewById(R.id.imgInsta);
+        aImgWhatsapp=findViewById(R.id.imgWhatsapp);
+        aImgLinkedIn=findViewById(R.id.imgLinkedIn);
+
 
         aBundle=getIntent().getExtras();
         aProfil=new Profil(aBundle.getString("profil_nom"),aBundle.getString("profil_name"),aBundle.getString("profil_email"),R.drawable.avatar_base);
@@ -64,19 +86,54 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                             Toast.makeText(PageAutreProflsActivity.this,"succes",Toast.LENGTH_SHORT).show();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String vPrenom = document.get("First Name").toString();
-                                String vNom = document.get("Last Name").toString();
-                                String vEmail = document.get("Email").toString();
-                                String vBio = document.get("Bio").toString();
-                                String vHobbies = document.get("Hobbies").toString();
-                                String vClass = document.get("Class").toString();
+                                String vNom=document.get("Last Name").toString();
+                                String vEmail=document.get("Email").toString();
+                                String vBio=document.get("Bio").toString();
+                                String vHobbies=document.get("Hobbies").toString();
+                                String vClass=document.get("Class").toString();
+                               // String vPdp=document.get("PdP").toString();
+                                String vClub=document.get("Club").toString();
+                                Map<String,Object> vSocial= (Map<String, Object>) document.get("Social Network");
+
+                                if (!vSocial.get("Snapchat").equals("snapchat")){
+                                    aTextSnap.setText(vSocial.get("Snapchat").toString());
+                                    aTextSnap.setVisibility(View.VISIBLE);
+                                    aImgSnap.setVisibility(View.VISIBLE);
+                                }
+                                if (!vSocial.get("GitHub").equals("github")){
+                                    aTextGit.setText(vSocial.get("GitHub").toString());
+                                    aTextGit.setVisibility(View.VISIBLE);
+                                    aImgGit.setVisibility(View.VISIBLE);
+                                }
+                                if (!vSocial.get("Discord").equals("discord")){
+                                    aTextDiscord.setText(vSocial.get("Discord").toString());
+                                    aTextDiscord.setVisibility(View.VISIBLE);
+                                    aImgDiscord.setVisibility(View.VISIBLE);
+                                }
+                                if (!vSocial.get("Instagramm").equals("instagram")){
+                                    aTextInsta.setText(vSocial.get("Instagramm").toString());
+                                    aTextInsta.setVisibility(View.VISIBLE);
+                                    aImgInsta.setVisibility(View.VISIBLE);
+                                }
+                                if (!vSocial.get("LinkedIn").equals("linkedin")){
+                                    aTextLinkedIn.setText(vSocial.get("LinkedIn").toString());
+                                    aTextLinkedIn.setVisibility(View.VISIBLE);
+                                    aImgLinkedIn.setVisibility(View.VISIBLE);
+                                }
+                                if (!vSocial.get("Whatsapp").equals("whatsapp")){
+                                    aTextWhatsapp.setText(vSocial.get("Whatsapp").toString());
+                                    aTextWhatsapp.setVisibility(View.VISIBLE);
+                                    aImgWhatsapp.setVisibility(View.VISIBLE);
+                                }
 
                                 aTextId.setText(vPrenom + " " + vNom);
                                 aTextEmail.setText(vEmail);
                                 aTextClasse.setText(vClass);
                                 aTextBio.setText(vBio);
-                                aTextLoisir.setText(vHobbies);}
+                                aTextLoisir.setText(vHobbies);
+                                aTextClub.setText(vClub);
 
-                                aProgressBar.setVisibility(View.GONE);
+
                                 aTextEmailAff.setVisibility(View.VISIBLE);
                                 aTextClasseAff.setVisibility(View.VISIBLE);
                                 aTextLoisirAff.setVisibility(View.VISIBLE);
@@ -91,7 +148,7 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                                 aTextClasse.setVisibility(View.VISIBLE);
                                 aTextClub.setVisibility(View.VISIBLE);
                                 aTextLoisir.setVisibility(View.VISIBLE);
-
+                            }
                         }
                     }
                 });

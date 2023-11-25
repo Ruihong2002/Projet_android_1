@@ -5,7 +5,6 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -18,6 +17,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -53,26 +53,23 @@ import java.util.Map;
 
 public class EditProfilsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    private static final int PICK_IMAGE_REQUEST = 1;
     FirebaseAuth aAuth;
     FirebaseUser aUser;
     TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
-
     TextView aTextId,aTextEmail;
-    ProgressBar aProgressBar;
-
     ImageButton aBtnEdit;
     ImageView aPdP;
     FirebaseFirestore aDatabase;
 
-    TextInputEditText aBio,aHobbies;
-
+    TextInputEditText aBio,aHobbies,aTextClub;
     Spinner aClasse;
     Uri aImagePdP;
-
     FirebaseStorage aStorage;
     StorageReference aStorageRef;
     DatabaseReference aDbRef;
+
+    TextInputEditText aTextGit,aTextSnap,aTextDiscord,aTextInsta,aTextWhatsapp,aTextLinkedIn;
+    Map<String,Object> aSocial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,36 +77,44 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
 
         setContentView(R.layout.edit_profils);
 
-        aAuth=FirebaseAuth.getInstance();
-        aUser=aAuth.getCurrentUser();
+        aAuth = FirebaseAuth.getInstance();
+        aUser = aAuth.getCurrentUser();
+
+        aSocial=new HashMap<String,Object>();
+
+        aBtnEdit = findViewById(R.id.BtnEdit);
 
 
-        aBtnEdit=findViewById(R.id.BtnEdit);
+        aTextId = findViewById(R.id.identite);
+        aTextEmail = findViewById(R.id.email_edit);
 
 
-        aTextId=findViewById(R.id.identite);
-        aTextEmail=findViewById(R.id.email_edit);
+        aTextEmailAff = findViewById(R.id.email_text);
+        aTextClasseAff = findViewById(R.id.classe);
+        aTextLoisirAff = findViewById(R.id.loisir);
+        aTextClubAff = findViewById(R.id.club);
+        aTextRSAff = findViewById(R.id.res_so);
+        aTextBioAff = findViewById(R.id.biographie);
 
 
-        aTextEmailAff=findViewById(R.id.email_text);
-        aTextClasseAff=findViewById(R.id.classe);
-        aTextLoisirAff=findViewById(R.id.loisir);
-        aTextClubAff=findViewById(R.id.club);
-        aTextRSAff=findViewById(R.id.res_so);
-        aTextBioAff=findViewById(R.id.biographie);
+        aHobbies = findViewById(R.id.hobbies_edit);
+        aBio = findViewById(R.id.bio_change);
+        aPdP = findViewById(R.id.userpdp);
+        aClasse = findViewById(R.id.class_select);
+        aTextClub = findViewById(R.id.club_edit);
 
+        aTextGit=findViewById(R.id.userGitHub);
+        aTextSnap=findViewById(R.id.userSnapChat);
+        aTextDiscord=findViewById(R.id.userDiscord);
+        aTextInsta=findViewById(R.id.userInstagramm);
+        aTextWhatsapp=findViewById(R.id.userWhatsapp);
+        aTextLinkedIn=findViewById(R.id.userLinkedIn);
 
-        aHobbies=findViewById(R.id.hobbies_edit);
-        aBio=findViewById(R.id.bio_change);
-        aPdP=findViewById(R.id.userpdp);
-        aClasse=findViewById(R.id.class_select);
-        aProgressBar=findViewById(R.id.progessBar1);
+        aDatabase = FirebaseFirestore.getInstance();
+        aDbRef = FirebaseDatabase.getInstance().getReference().child("image/");
+        aStorage = FirebaseStorage.getInstance();
 
-        aDatabase=FirebaseFirestore.getInstance();
-        aDbRef = FirebaseDatabase.getInstance().getReference().child("Image");
-        aStorage=FirebaseStorage.getInstance();
-
-        aStorageRef=FirebaseStorage.getInstance().getReference();
+        aStorageRef = FirebaseStorage.getInstance().getReference();
 
 
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.ListeClasse,android.R.layout.simple_spinner_item);
@@ -125,10 +130,6 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                     Intent data= result.getData();
                     aImagePdP=data.getData();
                     aPdP.setImageURI(aImagePdP);
-                    Toast.makeText(EditProfilsActivity.this,"image selected",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(EditProfilsActivity.this,"No image selected",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -144,7 +145,6 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
 
         aDatabase.collection("utilisateur").whereEqualTo("Email",aUser.getEmail()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -154,14 +154,36 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                                 String pEmail = document.get("Email").toString();
                                 String pHobbies=document.get("Hobbies").toString();
                                 String pBio=document.get("Bio").toString();
-                                String pClass=document.get("Class").toString();
+                                String vClub=document.get("Club").toString();
+                                aSocial= (Map<String, Object>) document.get("Social Network");
 
+                                if (aSocial.get("Snapchat").equals("snapchat")==false){
+                                    aTextSnap.setText(aSocial.get("Snapchat").toString());
+                                }
+                                if (aSocial.get("GitHub").equals("github")==false){
+                                    aTextGit.setText(aSocial.get("GitHub").toString());
+
+                                }
+                                if (aSocial.get("Discord").equals("discord")==false){
+                                    aTextDiscord.setText(aSocial.get("Discord").toString());
+                                }
+                                if (aSocial.get("Instagramm").equals("instagram")==false){
+                                    aTextInsta.setText(aSocial.get("Instagramm").toString());
+                                }
+                                if (aSocial.get("LinkedIn").equals("linkedin")==false){
+                                    aTextLinkedIn.setText(aSocial.get("LinkedIn").toString());
+                                }
+                                if (aSocial.get("Whatsapp").equals("whatsapp")==false){
+                                    aTextWhatsapp.setText(aSocial.get("Whatsapp").toString());
+                                }
                                 aTextId.setText(pPrenom + " " + pNom);
                                 aTextEmail.setText(pEmail);
                                 aHobbies.setText(pHobbies);
                                 aBio.setText(pBio);
+                                aTextClub.setText(vClub);
 
-                                aProgressBar.setVisibility(View.GONE);
+
+
                                 aTextEmailAff.setVisibility(View.VISIBLE);
                                 aTextClasseAff.setVisibility(View.VISIBLE);
                                 aTextLoisirAff.setVisibility(View.VISIBLE);
@@ -176,48 +198,75 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                                 aHobbies.setVisibility(View.VISIBLE);
                                 aBio.setVisibility(View.VISIBLE);
                                 aClasse.setVisibility(View.VISIBLE);
-
-
-
                             }
                         }
                     }
                 });
 
-            aClasse.setOnItemSelectedListener(this);
-
             aBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String vHobbies,vBio,vEmail;
+                String vHobbies,vBio,vEmail,vDiscord,vSnap,vInsta,vGit,vLinked,vWhatsapp;
                 vHobbies=aHobbies.getText().toString();
                 vBio=aBio.getText().toString();
                 vEmail=aUser.getEmail();
-                if (TextUtils.isEmpty(vBio)==false) {
-                    UpdateProfil(vEmail,"Bio",vBio);
+                vDiscord=aTextDiscord.getText().toString();
+                vSnap=aTextSnap.getText().toString();
+                vInsta=aTextInsta.getText().toString();
+                vGit =aTextGit.getText().toString();
+                vLinked=aTextLinkedIn.getText().toString();
+                vWhatsapp=aTextWhatsapp.getText().toString();
+                aClasse.setOnItemSelectedListener(EditProfilsActivity.this);
+                if (TextUtils.isEmpty(vDiscord)==false) {
+                    aSocial.replace("Discord",vDiscord);
                 }
-                if (TextUtils.isEmpty(vHobbies)==false) {
-                    UpdateProfil(vEmail,"Hobbies",vHobbies);
+                else{
+                    aSocial.replace("Discord","discord");
                 }
-                if (aImagePdP!=null) {
+                if (TextUtils.isEmpty(vSnap)==false) {
+                    aSocial.replace("Snapchat",vSnap);
+                }
+                else{
+                    aSocial.replace("Snapchat","snapchat");
+                }
+                if (TextUtils.isEmpty(vInsta)==false) {
+                    aSocial.replace("Instagramm",vInsta);
+                }
+                else{
+                    aSocial.replace("Instagramm","instagram");
+                }
+                if (TextUtils.isEmpty(vGit)==false) {
+                    aSocial.replace("GitHub",vGit);
+                }
+                else{
+                    aSocial.replace("GitHub","github");
+                }
+                if (TextUtils.isEmpty(vLinked)==false) {
+                    aSocial.replace("LinkedIn",vLinked);
+                }
+                else{
+                    aSocial.replace("LinkedIn","linkedin");
+                }
+                if (TextUtils.isEmpty(vWhatsapp)==false) {
+                    aSocial.replace("Whatsapp",vWhatsapp);
+                }
+                else{
+                    aSocial.replace("Whatsapp","whatsapp");
+                }
+                UpdateProfil(vEmail,"Bio",vBio);
+                UpdateProfil(vEmail,"Hobbies",vHobbies);
+                UpdateProfil(vEmail,"Social Network",aSocial);
+
+                    if (aImagePdP!=null) {
                     uploadIntoStorage(aImagePdP);
                 }
-
                 Intent it = new Intent(getApplicationContext(), PageMonProfilActivity.class);
                 startActivity(it);
             }
         });
     }
-/*
-    private void selectImageFromGallery() {
-        Intent vImage=new Intent();
-        vImage.setType("image/*");
-        vImage.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(vImage,PICK_IMAGE_REQUEST);
-        //aPdP.setImageURI(aImagePdP);
-    }
-*/
     private void uploadIntoStorage(Uri pUri) {
+        String vEmail=aUser.getEmail();
         Toast.makeText(EditProfilsActivity.this,"uploading",Toast.LENGTH_SHORT).show();
              StorageReference vImageRef=aStorageRef.child(System.currentTimeMillis()+"."+getFileExtention(pUri));
              vImageRef.putFile(pUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -230,10 +279,7 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                              Model vModel=new Model(uri.toString());
                              String vModelID=aDbRef.push().getKey();
                              aDbRef.child(vModelID).setValue(vModel);
-                             Intent it=new Intent(EditProfilsActivity.this, PageMonProfilActivity.class);
-                             startActivity(it);
-                             finish();
-
+                             UpdateProfil(vEmail,"PdP",vImageRef.getDownloadUrl().toString());
                          }
                      });
                  }
@@ -256,17 +302,8 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
         MimeTypeMap vMTM=MimeTypeMap.getSingleton();
         return vMTM.getExtensionFromMimeType(vContentResolver.getType(pUri));
     }
-/*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==PICK_IMAGE_REQUEST && resultCode==RESULT_OK && data!=null && data.getData()!=null){
-            aImagePdP=data.getData();
 
-        }
-    }
-*/
-    private void UpdateProfil(String pEmail, String pDataID, String pData){
+    private void UpdateProfil(String pEmail, String pDataID, Object pData){
         aDatabase=FirebaseFirestore.getInstance();
         Map<String,Object> userData=new HashMap<>();
         userData.put(pDataID,pData);
@@ -279,22 +316,7 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                             DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
                             String vDocID=documentSnapshot.getId();
                             DocumentReference docRef= aDatabase.collection("utilisateur").document(vDocID);
-                            docRef.update(userData)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            Toast.makeText(EditProfilsActivity.this, "Successful.",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(EditProfilsActivity.this, "fail.",
-                                                    Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    });
-
+                            docRef.update(userData);
                     }
                 });
 
@@ -309,6 +331,8 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+
 
     }
 

@@ -34,6 +34,8 @@
     <string name="favorite">Favorite</string>
     <string name="Type_a_message">Favorite</string>
     <string name="last_conversation">Last Conversation</string>
+    <string name="recherche">Recherche</string>
+    <string name="logo_linkedin">logo linkedIn</string>
 
     <string-array name="ListeClasse">
         <item>Class</item>

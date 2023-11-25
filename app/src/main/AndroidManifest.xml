@@ -25,9 +25,6 @@
             android:name=".Chat"
             android:exported="false" />
         <activity
-            android:name=".Envoie_des_messages"
-            android:exported="false" />
-        <activity
             android:name=".EditProfilsActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
