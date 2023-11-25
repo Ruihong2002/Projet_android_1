@@ -94,11 +94,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     user.put("PdP","avatar_base.png");
                                     user.put("Club","Club");
                                     Map<String,Object> userSocialNetwork=new HashMap<>();
-                                    userSocialNetwork.put("LinkedIn","");
-                                    userSocialNetwork.put("Discord","");
-                                    userSocialNetwork.put("GitHub","");
-                                    userSocialNetwork.put("Snapchat","");
-                                    userSocialNetwork.put("Instagramm","");
+                                    userSocialNetwork.put("LinkedIn","linkedin");
+                                    userSocialNetwork.put("Discord","discord");
+                                    userSocialNetwork.put("GitHub","github");
+                                    userSocialNetwork.put("Snapchat","snapchat");
+                                    userSocialNetwork.put("Instagramm","instagram");
+                                    userSocialNetwork.put("Whatsapp","whatsapp");
                                     user.put("Social Network",userSocialNetwork);
 
                                     db.collection("utilisateur").add(user);

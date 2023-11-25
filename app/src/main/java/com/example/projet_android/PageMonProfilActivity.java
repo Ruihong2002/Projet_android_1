@@ -3,49 +3,35 @@ package com.example.projet_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.ViewTarget;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FileDownloadTask;
+
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
+import java.util.Map;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class PageMonProfilActivity extends AppCompatActivity {
 
@@ -58,6 +44,8 @@ public class PageMonProfilActivity extends AppCompatActivity {
     FirebaseFirestore aDatabase;
     StorageReference aStorageRef,aPdPRef;
 
+    TextView aTextGit,aTextSnap,aTextDiscord,aTextInsta,aTextWhatsapp,aTextLinkedIn;
+    ImageView aImgGit,aImgSnap,aImgDiscord,aImgInsta,aImgWhatsapp,aImgLinkedIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +71,21 @@ public class PageMonProfilActivity extends AppCompatActivity {
         aTextClub=findViewById(R.id.club_edit);
         aTextLoisir=findViewById(R.id.hobbies_edit);
 
+        aTextGit=findViewById(R.id.userGitHub);
+        aTextSnap=findViewById(R.id.userSnapChat);
+        aTextDiscord=findViewById(R.id.userDiscord);
+        aTextInsta=findViewById(R.id.userInstagramm);
+        aTextWhatsapp=findViewById(R.id.userWhatsapp);
+        aTextLinkedIn=findViewById(R.id.userLinkedIn);
+
+        aImgGit=findViewById(R.id.imgGithub);
+        aImgSnap=findViewById(R.id.imgSnap);
+        aImgDiscord=findViewById(R.id.imgDiscord);
+        aImgInsta=findViewById(R.id.imgInsta);
+        aImgWhatsapp=findViewById(R.id.imgWhatsapp);
+        aImgLinkedIn=findViewById(R.id.imgLinkedIn);
+
+
         aStorageRef = FirebaseStorage.getInstance().getReference();
         aPdPRef = aStorageRef.child("avatar_base.png");
 
@@ -103,11 +106,11 @@ public class PageMonProfilActivity extends AppCompatActivity {
                                 String vClass=document.get("Class").toString();
                                 String vPdp=document.get("PdP").toString();
                                 String vClub=document.get("Club").toString();
+                                Map<String,Object> vSocial= (Map<String, Object>) document.get("Social Network");
 
                                 StorageReference imageRef = aStorageRef.child(vPdp);
 
-                                ViewTarget<ImageView, Drawable> aTest = Glide.with(PageMonProfilActivity.this).load(imageRef).into(aPdP);
-                                Log.d("Glide:",aTest.toString());
+                                Glide.with(PageMonProfilActivity.this).load(imageRef).into(aPdP);
                                 imageRef.getDownloadUrl()
                                         .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                                   @Override
@@ -122,8 +125,38 @@ public class PageMonProfilActivity extends AppCompatActivity {
                             aTextClasse.setText(vClass);
                             aTextBio.setText(vBio);
                             aTextLoisir.setText(vHobbies);
-
                             aTextClub.setText(vClub);
+
+                            /*if (vSocial.get("Snapchat")!="snapchat"){
+                                aTextSnap.setText(vSocial.get("Snapchat").toString());
+                                aTextSnap.setVisibility(View.VISIBLE);
+                                aImgSnap.setVisibility(View.VISIBLE);
+                            }
+                            if (vSocial.get("GitHub")!="github"){
+                                aTextGit.setText(vSocial.get("GitHub").toString());
+                                aTextGit.setVisibility(View.VISIBLE);
+                                aImgGit.setVisibility(View.VISIBLE);
+                            }
+                            if (vSocial.get("Discord")!="discord"){
+                                aTextDiscord.setText(vSocial.get("Discord").toString());
+                                aTextDiscord.setVisibility(View.VISIBLE);
+                                aImgDiscord.setVisibility(View.VISIBLE);
+                            }
+                            if (vSocial.get("Instagramm")!="instagram"){
+                                aTextInsta.setText(vSocial.get("Instagramm").toString());
+                                aTextInsta.setVisibility(View.VISIBLE);
+                                aImgInsta.setVisibility(View.VISIBLE);
+                            }
+                            if (vSocial.get("LinkedIn")!="linkedin"){
+                                aTextLinkedIn.setText(vSocial.get("LinkedIn").toString());
+                                aTextLinkedIn.setVisibility(View.VISIBLE);
+                                aImgLinkedIn.setVisibility(View.VISIBLE);
+                            }
+                            if (vSocial.get("Whatsapp")!="whatsapp"){
+                                aTextWhatsapp.setText(vSocial.get("Whatsapp").toString());
+                                aTextWhatsapp.setVisibility(View.VISIBLE);
+                                aImgWhatsapp.setVisibility(View.VISIBLE);
+                            }*/
 
                             aTextEmailAff.setVisibility(View.VISIBLE);
                             aTextClasseAff.setVisibility(View.VISIBLE);

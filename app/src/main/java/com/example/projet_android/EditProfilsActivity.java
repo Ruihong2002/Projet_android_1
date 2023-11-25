@@ -56,21 +56,19 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
     FirebaseAuth aAuth;
     FirebaseUser aUser;
     TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
-
     TextView aTextId,aTextEmail;
-
     ImageButton aBtnEdit;
     ImageView aPdP;
     FirebaseFirestore aDatabase;
 
     TextInputEditText aBio,aHobbies,aTextClub;
-
     Spinner aClasse;
     Uri aImagePdP;
-
     FirebaseStorage aStorage;
     StorageReference aStorageRef;
     DatabaseReference aDbRef;
+
+    TextInputEditText aTextGit,aTextSnap,aTextDiscord,aTextInsta,aTextWhatsapp,aTextLinkedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +100,13 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
         aPdP = findViewById(R.id.userpdp);
         aClasse = findViewById(R.id.class_select);
         aTextClub = findViewById(R.id.club_edit);
+
+        aTextGit=findViewById(R.id.userGitHub);
+        aTextSnap=findViewById(R.id.userSnapChat);
+        aTextDiscord=findViewById(R.id.userDiscord);
+        aTextInsta=findViewById(R.id.userInstagramm);
+        aTextWhatsapp=findViewById(R.id.userWhatsapp);
+        aTextLinkedIn=findViewById(R.id.userLinkedIn);
 
         aDatabase = FirebaseFirestore.getInstance();
         aDbRef = FirebaseDatabase.getInstance().getReference().child("image/");
