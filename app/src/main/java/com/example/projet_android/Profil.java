@@ -5,7 +5,7 @@ public class Profil {
     String aPersonNom;
     String aPersonPrenom;
     String aEmail;
-    int aPdP;
+    String aPdP;
 
     public String getEmail() {
         return aEmail;
@@ -15,7 +15,7 @@ public class Profil {
         this.aEmail = aEmail;
     }
 
-    public Profil(String aPersonNom, String aPersonPrenom, String aEmail, int aPdP) {
+    public Profil(String aPersonNom, String aPersonPrenom, String aEmail, String aPdP) {
 
         this.aPersonNom = aPersonNom;
         this.aPersonPrenom = aPersonPrenom;
@@ -39,11 +39,11 @@ public class Profil {
         this.aPersonPrenom = aPersonPrenom;
     }
 
-    public int getPdP() {
+    public String getPdP() {
         return aPdP;
     }
 
-    public void setPdP(int aPdP) {
+    public void setPdP(String aPdP) {
         this.aPdP = aPdP;
     }
 }

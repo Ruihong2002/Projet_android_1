@@ -17,8 +17,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,7 +102,21 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     userSocialNetwork.put("Whatsapp","whatsapp");
                                     user.put("Social Network",userSocialNetwork);
 
+                                    Map<String,Object> userConvData=new HashMap<>();
+                                    userConvData.put("Email",email);
+                                    ArrayList<Object> favoriList=new ArrayList<>();
+                                    ArrayList<Object> lastConvList=new ArrayList<>();
+                                    ArrayList<Object> groupeList=new ArrayList<>();
+                                    userConvData.put("Favori",favoriList);
+                                    userConvData.put("LastConv",lastConvList);
+                                    userConvData.put("Groupe",groupeList);
+
                                     db.collection("utilisateur").add(user);
+                                    db.collection("userDataConv").add(userConvData);
+
+                                    FirebaseAuth.getInstance().signOut();
+                                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                                    startActivity(it);
                                 } else {
                                     Toast.makeText(CreateAccountActivity.this, "Account Creation Failed.",
                                             Toast.LENGTH_SHORT).show();

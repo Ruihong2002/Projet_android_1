@@ -2,38 +2,22 @@ package com.example.projet_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
-
-import com.bumptech.glide.request.target.ViewTarget;
-import com.example.projet_android.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
-
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import java.util.Map;
 
 
@@ -46,10 +30,12 @@ public class PageMonProfilActivity extends AppCompatActivity {
     TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
     ImageView aPdP;
     FirebaseFirestore aDatabase;
-    StorageReference aStorageRef,aPdPRef;
+    StorageReference aStorageRef;
+    String aPdp;
 
     TextView aTextGit,aTextSnap,aTextDiscord,aTextInsta,aTextWhatsapp,aTextLinkedIn;
     ImageView aImgGit,aImgSnap,aImgDiscord,aImgInsta,aImgWhatsapp,aImgLinkedIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +74,6 @@ public class PageMonProfilActivity extends AppCompatActivity {
         aImgInsta=findViewById(R.id.imgInsta);
         aImgWhatsapp=findViewById(R.id.imgWhatsapp);
         aImgLinkedIn=findViewById(R.id.imgLinkedIn);
-
 
         aStorageRef = FirebaseStorage.getInstance().getReference();
 

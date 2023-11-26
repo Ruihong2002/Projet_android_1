@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="111dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal">
 
@@ -51,6 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:layout_marginTop="10dp">
 
 
@@ -69,7 +71,6 @@
             android:layout_height="30dp"
             android:contentDescription="@string/favoris"
             android:id="@+id/favoris"
-            android:layout_marginStart="10dp"
             app:srcCompat="@drawable/epingler"
             android:scaleType="fitCenter" />
 
@@ -81,7 +82,7 @@
             android:textColor="@color/black"
             android:fontFamily="@font/arial"
             android:layout_marginTop="7dp"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="50dp"
             android:textSize="12sp"
             android:text="@string/send_message"/>
 

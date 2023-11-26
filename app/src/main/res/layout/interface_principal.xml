@@ -79,16 +79,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_profil"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="20dp"
+        app:layout_constraintHeight_max="250dp"
         android:layout_marginTop="10dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_gravity="bottom"
         android:layout_marginBottom="0dp"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/imageButtonConversation"
@@ -103,21 +106,21 @@
             android:id="@+id/imageButtonRechercheProfil"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginStart="50dp"
             android:background="@color/white"
             android:contentDescription="@string/bouton_recheche"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/recherche"
-            android:layout_marginStart="50dp"/>
+            app:srcCompat="@drawable/recherche" />
 
         <ImageButton
             android:id="@+id/imageButtonGroupe"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:scaleType="fitCenter"
-            android:background="@color/white"
             android:layout_marginStart="50dp"
+            android:background="@color/white"
             android:contentDescription="@string/groupe"
-            app:srcCompat="@drawable/groupe"/>
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/groupe" />
     </LinearLayout>
 
 

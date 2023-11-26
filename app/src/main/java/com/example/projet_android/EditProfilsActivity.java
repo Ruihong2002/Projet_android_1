@@ -27,6 +27,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -60,14 +61,12 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
     ImageButton aBtnEdit;
     ImageView aPdP;
     FirebaseFirestore aDatabase;
-
     TextInputEditText aBio,aHobbies,aTextClub;
     Spinner aClasse;
     Uri aImagePdP;
     FirebaseStorage aStorage;
     StorageReference aStorageRef;
     DatabaseReference aDbRef;
-
     TextInputEditText aTextGit,aTextSnap,aTextDiscord,aTextInsta,aTextWhatsapp,aTextLinkedIn;
     Map<String,Object> aSocial;
 
@@ -156,6 +155,7 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                                 String pEmail = document.get("Email").toString();
                                 String pHobbies=document.get("Hobbies").toString();
                                 String pBio=document.get("Bio").toString();
+                                String vPdp=document.get("PdP").toString();
                                 String vClub=document.get("Club").toString();
                                 aSocial= (Map<String, Object>) document.get("Social Network");
 
@@ -183,6 +183,8 @@ public class EditProfilsActivity extends AppCompatActivity implements AdapterVie
                                 aHobbies.setText(pHobbies);
                                 aBio.setText(pBio);
                                 aTextClub.setText(vClub);
+                                Glide.with(EditProfilsActivity.this).load(vPdp).into(aPdP);
+
 
 
 

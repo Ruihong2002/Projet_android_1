@@ -15,11 +15,16 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +32,8 @@ public class PageAutreProflsActivity extends AppCompatActivity {
 
 
     ImageButton aBtnBack;
+    FirebaseAuth aAuth;
+    FirebaseUser User;
     FirebaseFirestore aDatabase;
     TextView aTextId,aTextEmail,aTextBio,aTextClasse,aTextClub,aTextLoisir,aTextSendMessage,aTextAddFavorite;
     TextView aTextEmailAff,aTextClasseAff,aTextLoisirAff,aTextClubAff,aTextRSAff,aTextBioAff;
@@ -42,7 +49,8 @@ public class PageAutreProflsActivity extends AppCompatActivity {
         setContentView(R.layout.page_autre_profls);
         aBtnBack=findViewById(R.id.Btnback);
 
-
+        aAuth= FirebaseAuth.getInstance();
+        User = aAuth.getCurrentUser();
         aTextId=findViewById(R.id.identite_other);
         aTextEmail=findViewById(R.id.email_data);
         aTextEmailAff=findViewById(R.id.email_text_other);
@@ -77,7 +85,7 @@ public class PageAutreProflsActivity extends AppCompatActivity {
 
 
         aBundle=getIntent().getExtras();
-        aProfil=new Profil(aBundle.getString("profil_nom"),aBundle.getString("profil_name"),aBundle.getString("profil_email"),R.drawable.avatar_base);
+        aProfil=new Profil(aBundle.getString("profil_nom"),aBundle.getString("profil_name"),aBundle.getString("profil_email"),"ff");
 
         aDatabase= FirebaseFirestore.getInstance();
         aDatabase.collection("utilisateur").whereEqualTo("Email",aProfil.getEmail()).get()
@@ -130,6 +138,8 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                                     aImgWhatsapp.setVisibility(View.VISIBLE);
                                 }
 
+
+
                                 aTextId.setText(vPrenom + " " + vNom);
                                 aTextEmail.setText(vEmail);
                                 aTextClasse.setText(vClass);
@@ -156,9 +166,23 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                         }
                     }
                 });
+        aDatabase.collection("userDataConv").whereEqualTo("Email",User.getEmail()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ArrayList<Object> vFavori = (ArrayList<Object>) document.get("Favori");
 
-
-
+                                if (vFavori.contains(aProfil.getEmail())) {
+                                    aTextAddFavorite.setText("Favorite Added");
+                                }
+                                else {
+                                    aTextAddFavorite.setText("Add Favorite");
+                                }
+                            }
+                        }
+                    }});
         aBtnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,21 +195,72 @@ public class PageAutreProflsActivity extends AppCompatActivity {
         aTextSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                aDatabase.collection("userDataConv").whereEqualTo("Email",User.getEmail()).get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        ArrayList<Object> vConv = (ArrayList<Object>) document.get("LastConv");
+                                        if (!vConv.contains(aProfil.getEmail())) {
+                                            vConv.add(aProfil.getEmail());
+                                            UpdateUserData("LastConv",vConv);
+                                        }
+                                    }
+                                }
+                            }});
+                Intent it = new Intent(getApplicationContext(),Chat.class);
+                startActivity(it);
             }
         });
 
         aTextAddFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentFavori=new Intent(getApplicationContext(), InterfaceListConversationActivity.class);
-                Bundle vFavori=new Bundle();
-                vFavori.putString("Favori_email",aProfil.getEmail());
-                vFavori.putString("Favori_Prenom",aProfil.getPersonPrenom());
-                vFavori.putString("Favori_Nom",aProfil.getPersonNom());
-                intentFavori.putExtras(vFavori);
-                aTextAddFavorite.setText("Favorite Added");
+                addFavorite();
             }
         });
     }
+
+    private void UpdateUserData( String pDataID, Object pData) {
+        aDatabase=FirebaseFirestore.getInstance();
+        Map<String,Object> userConvData=new HashMap<>();
+        userConvData.put(pDataID,pData);
+        aDatabase.collection("userDataConv")
+                .whereEqualTo("Email",User.getEmail())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
+                        String vDocID=documentSnapshot.getId();
+                        DocumentReference docRef= aDatabase.collection("userDataConv").document(vDocID);
+                        docRef.update(userConvData);
+                    }
+                });
+    }
+
+    public void addFavorite(){
+        aDatabase.collection("userDataConv").whereEqualTo("Email",User.getEmail()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ArrayList<Object> vFavori = (ArrayList<Object>) document.get("Favori");
+                                if (!vFavori.contains(aProfil.getEmail())) {
+                                    vFavori.add(aProfil.getEmail());
+                                    aTextAddFavorite.setText("Favorite Added");
+                                    UpdateUserData("Favori",vFavori);
+                                }
+                                else{
+                                    vFavori.remove(aProfil.getEmail());
+                                    aTextAddFavorite.setText("Add Favorite");
+                                    UpdateUserData("Favori",vFavori);
+
+                                }
+                            }
+                        }
+                    }});
+    }
+
 }

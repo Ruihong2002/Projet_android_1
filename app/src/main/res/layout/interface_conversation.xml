@@ -50,55 +50,66 @@
                     android:layout_marginStart="50dp"
                     android:backgroundTint="@color/bluesky"
                     android:fontFamily="@font/boldthick"
-                    android:hint="@string/back"
+                    android:hint="@string/logout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
-
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
             android:icon="@drawable/baseline_search_24"
             android:visibility="visible"
             app:actionViewClass="android.widget.SearchView"
             app:iconifiedByDefault="false"
             app:queryHint="Search for a profile..."
             android:fontFamily="@font/arial"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/favorite"
-            android:fontFamily="@font/arial"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_favori"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintHeight_max="150dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/last_conversation"
-            android:fontFamily="@font/arial"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_conversation"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintHeight_max="200dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="150dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/arial"
+                    android:text="@string/favorite"
+                    android:textSize="20sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_favori"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    app:layout_constraintHeight_max="150dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/last_conversation"
+                    android:fontFamily="@font/arial"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_conversation"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight_max="200dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp" />
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
