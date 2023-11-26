@@ -172,9 +172,9 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                ArrayList<Object> vFavori = (ArrayList<Object>) document.get("Favori");
+                                HashMap<String,Object> vFavori = (HashMap<String, Object>) document.get("Favori");
 
-                                if (vFavori.contains(aProfil.getEmail())) {
+                                if (vFavori.containsKey(aProfil.getEmail())) {
                                     aTextAddFavorite.setText("Favorite Added");
                                 }
                                 else {
@@ -201,9 +201,9 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                        ArrayList<Object> vConv = (ArrayList<Object>) document.get("LastConv");
-                                        if (!vConv.contains(aProfil.getEmail())) {
-                                            vConv.add(aProfil.getEmail());
+                                        HashMap<String,Object> vConv = (HashMap<String,Object>) document.get("LastConv");
+                                        if (!vConv.containsKey(aProfil.getEmail())) {
+                                            vConv.put(aProfil.getEmail(),aProfil.getPersonPrenom()+" "+aProfil.getPersonNom());
                                             UpdateUserData("LastConv",vConv);
                                         }
                                     }
@@ -246,9 +246,9 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                ArrayList<Object> vFavori = (ArrayList<Object>) document.get("Favori");
-                                if (!vFavori.contains(aProfil.getEmail())) {
-                                    vFavori.add(aProfil.getEmail());
+                                HashMap<String,Object> vFavori = (HashMap<String,Object>) document.get("Favori");
+                                if (!vFavori.containsKey(aProfil.getEmail())) {
+                                    vFavori.put(aProfil.getEmail(),aProfil.getPersonPrenom()+" "+aProfil.getPersonNom());
                                     aTextAddFavorite.setText("Favorite Added");
                                     UpdateUserData("Favori",vFavori);
                                 }
@@ -256,7 +256,6 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                                     vFavori.remove(aProfil.getEmail());
                                     aTextAddFavorite.setText("Add Favorite");
                                     UpdateUserData("Favori",vFavori);
-
                                 }
                             }
                         }

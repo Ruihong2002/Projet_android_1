@@ -104,8 +104,8 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                                     Map<String,Object> userConvData=new HashMap<>();
                                     userConvData.put("Email",email);
-                                    ArrayList<Object> favoriList=new ArrayList<>();
-                                    ArrayList<Object> lastConvList=new ArrayList<>();
+                                    Map<String,Object> favoriList=new HashMap<>();
+                                    Map<String,Object> lastConvList=new HashMap<>();
                                     ArrayList<Object> groupeList=new ArrayList<>();
                                     userConvData.put("Favori",favoriList);
                                     userConvData.put("LastConv",lastConvList);

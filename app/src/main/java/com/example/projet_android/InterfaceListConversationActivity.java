@@ -2,16 +2,16 @@ package com.example.projet_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.ListView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,54 +23,65 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.checkerframework.checker.units.qual.Luminance;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public class InterfaceListConversationActivity extends AppCompatActivity  implements  RecyclerViewInterface{
+public class InterfaceListConversationActivity extends AppCompatActivity {
 
     ImageButton aBtnProfil,aBtnRecherche,aBtnGroupe;
     Button aLogOut;
     FirebaseAuth aAuth;
     FirebaseFirestore aDatabase;
     FirebaseUser User;
+
+    ListView aFavoriView,aConvView;
     RecyclerView aRecyclerView,aFavoriRecyclerView;
     ArrayList<Profil> aListProfil,aListFavori;
-    ArrayList<Object> aConvData,aFavoriData;
-    MyAdapter adapterLastConv,adapterFavorite;
+    ArrayList<String> aListProf,aListFav;
+    ArrayList<String> aListProfInt,aListFavInt;
+    ArrayAdapter<String> aAdapterFavori,aAdapterConv;
+    Map<String,Object> aConvData,aFavoriData;
+    MyAdapter adapterLastConv,adapterFdszavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interface_conversation);
 
-        aLogOut = findViewById(R.id.button6);
-        aBtnProfil = findViewById(R.id.imageButtonMonProfil2);
-        aRecyclerView = findViewById(R.id.list_conversation);
-        aFavoriRecyclerView = findViewById(R.id.list_favori);
-        aBtnRecherche=findViewById(R.id.imageButtonRechercheProfil);
-        aBtnGroupe=findViewById(R.id.imageButtonGroupe);
-
-
-        aListFavori = new ArrayList<Profil>();
-        aListProfil = new ArrayList<Profil>();
-
-        aConvData = new ArrayList<>();
-        aFavoriData = new ArrayList<>();
-
-
-        aRecyclerView.setHasFixedSize(true);
-        aFavoriRecyclerView.setHasFixedSize(true);
-        aRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        aFavoriRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        aListFavori = new ArrayList<Profil>();
-        aListProfil = new ArrayList<Profil>();
-
         aAuth = FirebaseAuth.getInstance();
         User = aAuth.getCurrentUser();
 
         aDatabase = FirebaseFirestore.getInstance();
+
+        aLogOut = findViewById(R.id.button6);
+        aBtnProfil = findViewById(R.id.imageButtonMonProfil2);
+        /*aRecyclerView = findViewById(R.id.list_conversation);
+        aFavoriRecyclerView = findViewById(R.id.list_favori);*/
+        aBtnRecherche=findViewById(R.id.imageButtonRechercheProfil);
+        aBtnGroupe=findViewById(R.id.imageButtonGroupe);
+
+        /*aListFavori = new ArrayList<Profil>();
+        aListProfil = new ArrayList<Profil>();*/
+
+        aListProf=new ArrayList<>();
+        aListFav=new ArrayList<>();
+        aListProfInt=new ArrayList<>();
+        aListFavInt=new ArrayList<>();
+
+        aConvData = new HashMap<>();
+        aFavoriData = new HashMap<>();
+
+        aFavoriView= (ListView) findViewById(R.id.ListViewFavori);
+        aConvView= (ListView) findViewById(R.id.ListViewLastConv);
+        setListView();
+        /*aRecyclerView.setHasFixedSize(true);
+        aFavoriRecyclerView.setHasFixedSize(true);
+        aRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        aFavoriRecyclerView.setLayoutManager(new LinearLayoutManager(this));*/
+
 
         aDatabase.collection("utilisateur").whereEqualTo("Email", User.getEmail()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -91,10 +102,11 @@ public class InterfaceListConversationActivity extends AppCompatActivity  implem
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                aConvData = (ArrayList<Object>) document.get("LastConv");
-                                aFavoriData = (ArrayList<Object>) document.get("Favori");
+                                aConvData = (HashMap<String,Object>) document.get("LastConv");
+                                aFavoriData = (HashMap<String,Object>) document.get("Favori");
                                 if (!aConvData.isEmpty()) {
-                                    for (Object email : aConvData) {
+                                    Set<String> ensembleDesClés = aConvData.keySet();
+                                    for (Object email : ensembleDesClés) {
                                         aDatabase.collection("utilisateur").whereEqualTo("Email", email.toString()).get()
                                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                     @Override
@@ -104,14 +116,10 @@ public class InterfaceListConversationActivity extends AppCompatActivity  implem
                                                                 String vName = document.getString("First Name").toString();
                                                                 String vSurname = document.getString("Last Name").toString();
                                                                 String vEmail = document.getString("Email").toString();
-                                                                String vPdp = document.get("PdP").toString();
-                                                                aListProfil.add(new Profil(vSurname, vName, vEmail, vPdp));
-                                                                Tasks.whenAllSuccess(task).addOnCompleteListener(new OnCompleteListener<List<Object>>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull Task<List<Object>> task) {
-                                                                        adapterLastConv.notifyDataSetChanged();
-                                                                    }
-                                                                });
+                                                                aListProf.add(vName+" "+vSurname);
+                                                                aListProfInt.add(vEmail);
+                                                                /*String vPdp = document.get("PdP").toString();
+                                                                aListProfil.add(new Profil(vSurname, vName, vEmail, vPdp));*/
                                                             }
                                                         }
                                                     }
@@ -120,39 +128,33 @@ public class InterfaceListConversationActivity extends AppCompatActivity  implem
                                 }
 
                                 if (!aFavoriData.isEmpty()) {
-                                    for (Object email : aFavoriData) {
-                                        Toast.makeText(InterfaceListConversationActivity.this, " la dans favo:" + email, Toast.LENGTH_SHORT).show();
+                                    Set<String> ensembleDesClés = aFavoriData.keySet();
+                                    for (Object email : ensembleDesClés) {
                                         aDatabase.collection("utilisateur").whereEqualTo("Email", email).get()
                                                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                         if (task.isSuccessful()) {
-                                                            Toast.makeText(InterfaceListConversationActivity.this, " la favo:", Toast.LENGTH_SHORT).show();
                                                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                                                Toast.makeText(InterfaceListConversationActivity.this, " la d:" + document, Toast.LENGTH_SHORT).show();
                                                                 String vName = document.getString("First Name").toString();
                                                                 String vSurname = document.getString("Last Name").toString();
                                                                 String vEmail = document.getString("Email").toString();
-                                                                String vPdp = document.get("PdP").toString();
-                                                                Profil pProfil = new Profil(vSurname, vName, vEmail, vPdp);
-                                                                aListFavori.add(pProfil);
-                                                                Log.d("desde",aListFavori.toString());
-                                                                Tasks.whenAllSuccess(task).addOnCompleteListener(new OnCompleteListener<List<Object>>() {
-                                                                    @Override
-                                                                    public void onComplete(@NonNull Task<List<Object>> task) {
-                                                                        adapterFavorite.notifyDataSetChanged();
-                                                                    }
-                                                                });
+                                                                aListFav.add(vName+" "+vSurname);
+                                                                aListFavInt.add(vEmail);
+                                                                /*String vPdp = document.get("PdP").toString();
+                                                                //Profil pProfil = new Profil(vSurname, vName, vEmail, vPdp);
+                                                                //aListFavori.add(pProfil);*/
+
+                                                                }
                                                             }
-                                                        }
-                                                    }
-                                                });
-                                    }
+                                                }
+                                    });
 
                                 }
                             }
                         }
                     }
+                }
                 });
         aLogOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -175,13 +177,77 @@ public class InterfaceListConversationActivity extends AppCompatActivity  implem
             }
         });
 
-        adapterLastConv=new MyAdapter(this,aListProfil);
+        /*adapterLastConv=new MyAdapter(this,aListProfil);
         adapterFavorite=new MyAdapter(this,aListFavori);
         aRecyclerView.setAdapter(adapterLastConv);
-        aFavoriRecyclerView.setAdapter(adapterFavorite);
+        aFavoriRecyclerView.setAdapter(adapterFavorite);*/
     }
 
-    @Override
+    private void setListView() {
+        aDatabase.collection("userDataConv").whereEqualTo("Email", User.getEmail()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                aConvData = (HashMap<String,Object>) document.get("LastConv");
+                                aFavoriData = (HashMap<String,Object>) document.get("Favori");
+
+                                if (!aConvData.isEmpty()) {
+                                    Set<String> ensembleDesClés = aConvData.keySet();
+                                    for (Object email : ensembleDesClés) {
+                                        aDatabase.collection("utilisateur").whereEqualTo("Email", email.toString()).get()
+                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                String vName = document.getString("First Name").toString();
+                                                                String vSurname = document.getString("Last Name").toString();
+                                                                String vEmail = document.getString("Email").toString();
+                                                                aListProf.add(vName+" "+vSurname);
+                                                                aListProfInt.add(vEmail);
+                                                                aAdapterConv= new ArrayAdapter<String>(InterfaceListConversationActivity.this,android.R.layout.simple_list_item_1,aListProf);
+                                                                aConvView.setAdapter(aAdapterConv);
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                }
+
+                                if (!aFavoriData.isEmpty()) {
+                                    Set<String> ensembleDesClés = aFavoriData.keySet();
+                                    for (Object email : ensembleDesClés) {
+                                        aDatabase.collection("utilisateur").whereEqualTo("Email", email).get()
+                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                String vName = document.getString("First Name").toString();
+                                                                String vSurname = document.getString("Last Name").toString();
+                                                                String vEmail = document.getString("Email").toString();
+                                                                aListFav.add(vName+" "+vSurname);
+                                                                aListFavInt.add(vEmail);
+                                                                aAdapterFavori=new ArrayAdapter<String>(InterfaceListConversationActivity.this,android.R.layout.simple_list_item_1,aListFav );
+                                                                aFavoriView.setAdapter(aAdapterFavori);
+                                                            }
+                                                        }
+                                                    }
+                                                });
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+    }
+
+    /*@Override
     public void onItemClick(int position) {
         Intent intent=new Intent(getApplicationContext(), PageAutreProflsActivity.class);
         Bundle vAffProfil=new Bundle();
@@ -190,6 +256,6 @@ public class InterfaceListConversationActivity extends AppCompatActivity  implem
         vAffProfil.putString("profil_nom",aListProfil.get(position).getPersonNom());
         intent.putExtras(vAffProfil);
         startActivity(intent);
-    }
+    }*/
 
 }

@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -29,7 +32,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InterfacePrincipalActivity extends AppCompatActivity {
 
@@ -39,10 +45,12 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
     FirebaseFirestore aDatabase;
     ImageButton aBtnProfil,aBtnConv;
     RecyclerView aRecyclerView;
+    ListView aListeV;
     ArrayList<Profil> aListProfil;
+    ArrayAdapter<String> listViewAdapter;
+    ArrayList<String> aListe;
+    Map<String,String> aHashmap;
     DatabaseReference aDatabaseRef= FirebaseDatabase.getInstance().getReference("image");
-    StorageReference aStorageRef= FirebaseStorage.getInstance().getReference("image");
-
     MyAdapter adapter;
 
     @Override
@@ -53,8 +61,10 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         aLogOut = findViewById(R.id.button5);
         aBtnConv= (ImageButton) findViewById(R.id.imageButtonConversation);
         aBtnProfil = (ImageButton)findViewById(R.id.imageButtonMonProfil);
+        aListeV=(ListView) findViewById(R.id.ListView);
 
-        aRecyclerView=findViewById(R.id.list_profil);
+        aHashmap=new HashMap<>();
+        aListe=new ArrayList<>();
 
         aOtherProfile=findViewById(R.id.btnOther);
         aAuth=FirebaseAuth.getInstance();
@@ -63,10 +73,9 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
 
         aDatabase= FirebaseFirestore.getInstance();
 
-
+        /* aRecyclerView=findViewById(R.id.list_profil);
         aRecyclerView.setHasFixedSize(true);
         aListProfil= new ArrayList<Profil>();
-
         aDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -81,7 +90,7 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
         if (user==null) {
             Intent it = new Intent(getApplicationContext(), LoginActivity.class);
@@ -89,23 +98,7 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
             finish();
         }
 
-        aDatabase.collection("utilisateur").whereEqualTo("Email",user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String vPdp = document.get("PdP").toString();
-                        Glide.with(InterfacePrincipalActivity.this).load(vPdp).into(aBtnProfil);
-                    }
-                }
-            }});
-
         Profil pProfil=new Profil("Hzudb","Veudbd","laurent2002laurent@hotmail.com","https://firebasestorage.googleapis.com/v0/b/projet-orion-cb071.appspot.com/o/image%2F1700962824610.jpg?alt=media&token=c1b435b8-48a9-470f-93f4-dc083695f55a");
-        aListProfil.add(pProfil);
-        Toast.makeText(this, "1"+aListProfil.get(0).getEmail(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "2"+aListProfil.get(0).getPersonPrenom(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "3"+aListProfil.get(0).getPersonNom(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "4"+aListProfil.get(0).getPdP(), Toast.LENGTH_SHORT).show();
         aOtherProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,11 +132,24 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
             }
         });
 
-        aRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new MyAdapter(this,aListProfil);
+        aDatabase.collection("utilisateur").whereEqualTo("Email",user.getEmail()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String vPdp = document.get("PdP").toString();
+                        Glide.with(InterfacePrincipalActivity.this).load(vPdp).into(aBtnProfil);
+                    }
+                }
+            }});
+       /* aListProfil.add(pProfil);
 
-        aRecyclerView.setAdapter(adapter);
-        Toast.makeText(this, "adapter"+adapter, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "aRecyclerView"+aRecyclerView, Toast.LENGTH_SHORT).show();
+        aRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+         adapter=new MyAdapter(this,aListProfil);
+         aRecyclerView.setAdapter(adapter);*/
+        aListe.add("Veudbd Hzudb");
+        listViewAdapter=new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, aListe);
+        aListeV.setAdapter(listViewAdapter);
     }
 }

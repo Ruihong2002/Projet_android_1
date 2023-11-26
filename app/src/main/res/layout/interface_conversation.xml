@@ -85,13 +85,13 @@
                     android:text="@string/favorite"
                     android:textSize="20sp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/list_favori"
+                <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintHeight_max="150dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp" />
+                    android:id="@+id/ListViewFavori"
+                    android:layout_marginStart="20dp"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,14 +100,13 @@
                     android:fontFamily="@font/arial"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/list_conversation"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintHeight_max="200dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp" />
 
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintHeight_max="200dp"
+                    android:id="@+id/ListViewLastConv"
+                    android:layout_marginStart="20dp"/>
 
         </LinearLayout>
 
@@ -147,7 +146,6 @@
                     android:contentDescription="@string/groupe"
                     app:srcCompat="@drawable/groupe"/>
         </LinearLayout>
-
 
 </FrameLayout>
 
