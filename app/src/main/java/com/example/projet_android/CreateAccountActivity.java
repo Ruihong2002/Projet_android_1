@@ -91,7 +91,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     user.put("Hobbies","Hobbies");
                                     user.put("Bio","Biography");
                                     user.put("Class","Class");
-                                    user.put("PdP","avatar_base.png");
+                                    user.put("PdP","https://firebasestorage.googleapis.com/v0/b/projet-orion-cb071.appspot.com/o/avatar_base.png?alt=media&token=7576d43d-b44c-4c84-a78c-ea42fa6668b0");
                                     user.put("Club","Club");
                                     Map<String,Object> userSocialNetwork=new HashMap<>();
                                     userSocialNetwork.put("LinkedIn","linkedin");

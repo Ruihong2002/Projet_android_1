@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -36,6 +37,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class InterfacePrincipalActivity extends AppCompatActivity {
 
@@ -48,6 +50,12 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
     ListView aListeV;
     ArrayList<Profil> aListProfil;
     ArrayAdapter<String> listViewAdapter;
+
+    Map<String,Object> aProfilData;
+    ArrayList<String> aListProfilLV,aListProfilNom;
+    ArrayList<String> aListProfilInt,aListProfilPrenom;
+    ArrayAdapter<String> aAdapterListe;
+
     ArrayList<String> aListe;
     Map<String,String> aHashmap;
     DatabaseReference aDatabaseRef= FirebaseDatabase.getInstance().getReference("image");
@@ -62,16 +70,24 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         aBtnConv= (ImageButton) findViewById(R.id.imageButtonConversation);
         aBtnProfil = (ImageButton)findViewById(R.id.imageButtonMonProfil);
         aListeV=(ListView) findViewById(R.id.ListView);
-
-        aHashmap=new HashMap<>();
-        aListe=new ArrayList<>();
-
         aOtherProfile=findViewById(R.id.btnOther);
         aAuth=FirebaseAuth.getInstance();
         user = aAuth.getCurrentUser();
 
 
         aDatabase= FirebaseFirestore.getInstance();
+
+        aHashmap=new HashMap<>();
+        aListe=new ArrayList<>();
+
+        aListProfilLV=new ArrayList<>();
+        aListProfilInt=new ArrayList<>();
+        aListProfilPrenom=new ArrayList<>();
+        aListProfilNom=new ArrayList<>();
+
+        setListView();
+
+
 
         /* aRecyclerView=findViewById(R.id.list_profil);
         aRecyclerView.setHasFixedSize(true);
@@ -98,15 +114,15 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
             finish();
         }
 
-        Profil pProfil=new Profil("Hzudb","Veudbd","laurent2002laurent@hotmail.com","https://firebasestorage.googleapis.com/v0/b/projet-orion-cb071.appspot.com/o/image%2F1700962824610.jpg?alt=media&token=c1b435b8-48a9-470f-93f4-dc083695f55a");
+
         aOtherProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent it=new Intent(getApplicationContext(), PageAutreProflsActivity.class);
                 Bundle bundle=new Bundle();
-                bundle.putString("profil_nom",pProfil.getPersonNom());
-                bundle.putString("profil_name",pProfil.getPersonPrenom());
-                bundle.putString("profil_email",pProfil.getEmail());
+                bundle.putString("profil_nom",aListProfilNom.get(0));
+                bundle.putString("profil_name",aListProfilPrenom.get(0));
+                bundle.putString("profil_email",aListProfilInt.get(0));
                 it.putExtras(bundle);
                 startActivity(it);
                 finish();
@@ -148,8 +164,60 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         aRecyclerView.setLayoutManager(new LinearLayoutManager(this));
          adapter=new MyAdapter(this,aListProfil);
          aRecyclerView.setAdapter(adapter);*/
-        aListe.add("Veudbd Hzudb");
-        listViewAdapter=new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, aListe);
+        aListProfilLV.add("Veudbd Hzudb");
+        aListProfilNom.add("Hzudb");
+        aListProfilPrenom.add("Veudbd");
+        aListProfilInt.add("laurent2002laurent@hotmail.com");
+        listViewAdapter=new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, aListProfilLV);
         aListeV.setAdapter(listViewAdapter);
+
+        aListeV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent it=new Intent(getApplicationContext(), PageAutreProflsActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("profil_nom",aListProfilNom.get(i));
+                bundle.putString("profil_name",aListProfilPrenom.get(i));
+                bundle.putString("profil_email",aListProfilInt.get(i));
+                it.putExtras(bundle);
+                startActivity(it);
+                finish();
+            }
+        });
+    }
+
+    private void setListView() {
+        aDatabase.collection("userDataConv").whereEqualTo("Email", user.getEmail()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                aProfilData = (HashMap<String,Object>) document.get("LastConv");
+
+                                if (!aProfilData.isEmpty()) {
+                                    Set<String> ensembleDesClés = aProfilData.keySet();
+                                    for (Object email : ensembleDesClés) {
+                                        aDatabase.collection("utilisateur").get()
+                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                String vName = document.getString("First Name").toString();
+                                                                String vSurname = document.getString("Last Name").toString();
+                                                                String vEmail = document.getString("Email").toString();
+                                                                aListProfilLV.add(vName+" "+vSurname);
+                                                                aListProfilInt.add(vEmail);
+                                                                aListProfilNom.add(vSurname);
+                                                                aListProfilPrenom.add(vName);
+                                                            }
+                                                            listViewAdapter= new ArrayAdapter<String>(InterfacePrincipalActivity.this,android.R.layout.simple_list_item_1,aListProfilLV);
+                                                            aListeV.setAdapter(listViewAdapter);
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                }}}}});
     }
 }
