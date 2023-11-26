@@ -8,10 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,6 +48,9 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
     Map<String,Object> aConvData,aFavoriData;
     MyAdapter adapterLastConv,adapterFdszavorite;
 
+    ArrayList<String> aListNomFav,aListPrenomFav;
+    ArrayList<String> aListNomConv,aListPrenomConv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +75,10 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
         aListFav=new ArrayList<>();
         aListProfInt=new ArrayList<>();
         aListFavInt=new ArrayList<>();
+        aListNomFav=new ArrayList<>();
+        aListPrenomFav=new ArrayList<>();
+        aListNomConv=new ArrayList<>();
+        aListPrenomConv=new ArrayList<>();
 
         aConvData = new HashMap<>();
         aFavoriData = new HashMap<>();
@@ -176,6 +185,36 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+        aFavoriView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent it = new Intent(getApplicationContext(), PageAutreProflsActivity.class);
+                Bundle bundle=new Bundle();
+                Toast.makeText(InterfaceListConversationActivity.this,"test1:"+aListFav.get(i),Toast.LENGTH_SHORT).show();
+                bundle.putString("profil_nom",aListNomFav.get(i));
+                bundle.putString("profil_name",aListPrenomFav.get(i));
+                bundle.putString("profil_email",aListFavInt.get(i));
+                Toast.makeText(InterfaceListConversationActivity.this,"test1:"+aListFavInt.get(i),Toast.LENGTH_SHORT).show();
+                it.putExtras(bundle);
+                startActivity(it);
+            }
+        });
+        aConvView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent it = new Intent(getApplicationContext(), PageAutreProflsActivity.class);
+                Bundle bundle=new Bundle();
+                Toast.makeText(InterfaceListConversationActivity.this,"test1:"+aListProf.get(i),Toast.LENGTH_SHORT).show();
+                bundle.putString("profil_nom",aListNomConv.get(i));
+                bundle.putString("profil_name",aListPrenomConv.get(i));
+                bundle.putString("profil_email",aListProfInt.get(i));
+                Toast.makeText(InterfaceListConversationActivity.this,"test1:"+aListProfInt.get(i),Toast.LENGTH_SHORT).show();
+                it.putExtras(bundle);
+                startActivity(it);
+            }
+        });
+
+
 
         /*adapterLastConv=new MyAdapter(this,aListProfil);
         adapterFavorite=new MyAdapter(this,aListFavori);
@@ -207,6 +246,8 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
                                                                 String vEmail = document.getString("Email").toString();
                                                                 aListProf.add(vName+" "+vSurname);
                                                                 aListProfInt.add(vEmail);
+                                                                aListNomConv.add(vSurname);
+                                                                aListPrenomConv.add(vName);
                                                                 aAdapterConv= new ArrayAdapter<String>(InterfaceListConversationActivity.this,android.R.layout.simple_list_item_1,aListProf);
                                                                 aConvView.setAdapter(aAdapterConv);
                                                             }
@@ -229,7 +270,9 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
                                                                 String vSurname = document.getString("Last Name").toString();
                                                                 String vEmail = document.getString("Email").toString();
                                                                 aListFav.add(vName+" "+vSurname);
+                                                                aListNomFav.add(vSurname);
                                                                 aListFavInt.add(vEmail);
+                                                                aListPrenomFav.add(vName);
                                                                 aAdapterFavori=new ArrayAdapter<String>(InterfaceListConversationActivity.this,android.R.layout.simple_list_item_1,aListFav );
                                                                 aFavoriView.setAdapter(aAdapterFavori);
                                                             }
