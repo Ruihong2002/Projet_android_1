@@ -28,8 +28,9 @@
      android:textColor="@color/material_dynamic_primary30"
      android:textSize="15sp"
      app:layout_constraintEnd_toEndOf="parent"
-     app:layout_constraintTop_toBottomOf="TextMessage" />
+        app:layout_constraintBottom_toTopOf="parent"
+        />
 
-     />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
