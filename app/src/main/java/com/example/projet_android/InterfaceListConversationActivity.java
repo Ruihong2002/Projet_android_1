@@ -179,6 +179,12 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+        aBtnGroupe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(InterfaceListConversationActivity.this,"Group function in developpement",Toast.LENGTH_SHORT).show();
+            }
+        });
         aBtnProfil.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent it = new Intent(getApplicationContext(), PageMonProfilActivity.class);

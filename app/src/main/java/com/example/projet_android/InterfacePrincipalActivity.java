@@ -42,10 +42,10 @@ import java.util.Set;
 public class InterfacePrincipalActivity extends AppCompatActivity {
 
     FirebaseAuth aAuth;
-    Button aLogOut,aOtherProfile;
+    Button aLogOut;
     FirebaseUser user;
     FirebaseFirestore aDatabase;
-    ImageButton aBtnProfil,aBtnConv;
+    ImageButton aBtnProfil,aBtnConv,aBtnGroup;
     RecyclerView aRecyclerView;
     ListView aListeV;
     ArrayList<Profil> aListProfil;
@@ -70,8 +70,12 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         aBtnConv= (ImageButton) findViewById(R.id.imageButtonConversation);
         aBtnProfil = (ImageButton)findViewById(R.id.imageButtonMonProfil);
         aListeV=(ListView) findViewById(R.id.ListView);
+
+        aBtnGroup=(ImageButton) findViewById(R.id.imageButtonGroupe);
+
         aAuth=FirebaseAuth.getInstance();
         user = aAuth.getCurrentUser();
+
 
 
         aDatabase= FirebaseFirestore.getInstance();
@@ -113,7 +117,12 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
             finish();
         }
 
-
+        aBtnGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(InterfacePrincipalActivity.this,"Group function in developpement",Toast.LENGTH_SHORT).show();
+            }
+        });
         aLogOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
