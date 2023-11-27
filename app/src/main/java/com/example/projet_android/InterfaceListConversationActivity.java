@@ -188,7 +188,8 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
         aFavoriView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent it = new Intent(getApplicationContext(), PageAutreProflsActivity.class);
+                Toast.makeText(InterfaceListConversationActivity.this,"Chat function in developpement",Toast.LENGTH_SHORT).show();
+                /*Intent it = new Intent(getApplicationContext(), PageAutreProflsActivity.class);
                 Bundle bundle=new Bundle();
                 Toast.makeText(InterfaceListConversationActivity.this,"test1:"+aListFav.get(i),Toast.LENGTH_SHORT).show();
                 bundle.putString("profil_nom",aListNomFav.get(i));
@@ -196,13 +197,14 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
                 bundle.putString("profil_email",aListFavInt.get(i));
                 Toast.makeText(InterfaceListConversationActivity.this,"test1:"+aListFavInt.get(i),Toast.LENGTH_SHORT).show();
                 it.putExtras(bundle);
-                startActivity(it);
+                startActivity(it);*/
             }
         });
         aConvView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent it = new Intent(getApplicationContext(), PageAutreProflsActivity.class);
+                Toast.makeText(InterfaceListConversationActivity.this,"Chat function in developpement",Toast.LENGTH_SHORT).show();
+                /*Intent it = new Intent(getApplicationContext(), PageAutreProflsActivity.class);
                 Bundle bundle=new Bundle();
                 Toast.makeText(InterfaceListConversationActivity.this,"test1:"+aListProf.get(i),Toast.LENGTH_SHORT).show();
                 bundle.putString("profil_nom",aListNomConv.get(i));
@@ -210,7 +212,7 @@ public class InterfaceListConversationActivity extends AppCompatActivity {
                 bundle.putString("profil_email",aListProfInt.get(i));
                 Toast.makeText(InterfaceListConversationActivity.this,"test1:"+aListProfInt.get(i),Toast.LENGTH_SHORT).show();
                 it.putExtras(bundle);
-                startActivity(it);
+                startActivity(it);*/
             }
         });
 

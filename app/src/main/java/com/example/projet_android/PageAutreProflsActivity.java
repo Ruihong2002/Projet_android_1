@@ -195,7 +195,8 @@ public class PageAutreProflsActivity extends AppCompatActivity {
         aTextSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                aDatabase.collection("userDataConv").whereEqualTo("Email",User.getEmail()).get()
+                Toast.makeText(PageAutreProflsActivity.this,"Chat function in developpement",Toast.LENGTH_SHORT).show();
+                /*aDatabase.collection("userDataConv").whereEqualTo("Email",User.getEmail()).get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -210,7 +211,7 @@ public class PageAutreProflsActivity extends AppCompatActivity {
                                 }
                             }});
                 Intent it = new Intent(getApplicationContext(),Chat.class);
-                startActivity(it);
+                startActivity(it);*/
             }
         });
 

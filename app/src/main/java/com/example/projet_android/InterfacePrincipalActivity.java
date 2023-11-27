@@ -70,7 +70,6 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         aBtnConv= (ImageButton) findViewById(R.id.imageButtonConversation);
         aBtnProfil = (ImageButton)findViewById(R.id.imageButtonMonProfil);
         aListeV=(ListView) findViewById(R.id.ListView);
-        aOtherProfile=findViewById(R.id.btnOther);
         aAuth=FirebaseAuth.getInstance();
         user = aAuth.getCurrentUser();
 
@@ -115,19 +114,6 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         }
 
 
-        aOtherProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it=new Intent(getApplicationContext(), PageAutreProflsActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putString("profil_nom",aListProfilNom.get(0));
-                bundle.putString("profil_name",aListProfilPrenom.get(0));
-                bundle.putString("profil_email",aListProfilInt.get(0));
-                it.putExtras(bundle);
-                startActivity(it);
-                finish();
-            }
-        });
         aLogOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
@@ -164,10 +150,10 @@ public class InterfacePrincipalActivity extends AppCompatActivity {
         aRecyclerView.setLayoutManager(new LinearLayoutManager(this));
          adapter=new MyAdapter(this,aListProfil);
          aRecyclerView.setAdapter(adapter);*/
-        aListProfilLV.add("Veudbd Hzudb");
-        aListProfilNom.add("Hzudb");
-        aListProfilPrenom.add("Veudbd");
-        aListProfilInt.add("laurent2002laurent@hotmail.com");
+        aListProfilLV.add("Laurent Zhang");
+        aListProfilNom.add("Zhang");
+        aListProfilPrenom.add("Laurent");
+        aListProfilInt.add("laurent.zhang@edu.esiee.fr");
         listViewAdapter=new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, aListProfilLV);
         aListeV.setAdapter(listViewAdapter);
 

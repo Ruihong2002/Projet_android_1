@@ -60,14 +60,6 @@
     android:layout_gravity="center"
     android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/btnOther"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/other_profile"
-            android:fontFamily="@font/boldthick"
-            android:hint="@string/other_profile"
-            android:textColorHint="@color/white" />
 
         <androidx.appcompat.widget.SearchView
         android:gravity="center_horizontal"
